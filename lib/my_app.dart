@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:travel_hub/core/utils/app_router.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      routerConfig: AppRouter.routers,
+    
+    );
   }
 }
