@@ -1,6 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:travel_hub/features/auth/login/login_screen.dart';
 import 'package:travel_hub/features/home/home_screen.dart';
+import 'package:travel_hub/features/hotels/booking/book_screen.dart';
+import 'package:travel_hub/features/hotels/hotels_screen.dart';
 import 'package:travel_hub/features/splash/splash_screen.dart';
 
 abstract class AppRouter {
@@ -9,9 +11,11 @@ abstract class AppRouter {
   static const kRegisterTwoView = '/registerTwoView';
   static const kRegisterThreeView = '/registerThreeView';
   //Home Feature
-  static const kHomeView = '/homeStudentView';
+  static const kHomeView = '/home';
 
-
+  //Hotels Feature
+  static const kHotelsView = '/hotels';
+  static const kBookView = '/book';
 
 
 
@@ -28,6 +32,14 @@ abstract class AppRouter {
       GoRoute(
         path: kHomeView,
         builder: (context, state) => const HomeScreen(),
+      ),
+       GoRoute(
+        path: kHotelsView,
+        builder: (context, state) => const HotelsScreen(),
+      ),
+      GoRoute(
+        path: kBookView,
+        builder: (context, state) => const BookScreen(),
       ),
     ],
   );
