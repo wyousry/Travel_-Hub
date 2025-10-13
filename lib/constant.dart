@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 const kBackgroundColor = Colors.blue;
 const kSplashColor = Color(0xff5D5D5E);
 const textFeild = Color(0xffECEFF1);
+const kRed = Colors.red;
+const kLoginIconColor= Color(0xff9810FA);
 const kWhite = Colors.white;
 const kBlack = Colors.black;
 const kPriceColor = Color(0xff155DFC);
@@ -20,3 +22,9 @@ const LinearGradient bookColor = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
 );
+const LinearGradient loginGradient = LinearGradient(
+  colors: <Color> [Color(0xFF1976D2), Color(0xFF512DA8)],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
+

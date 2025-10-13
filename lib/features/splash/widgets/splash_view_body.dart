@@ -35,7 +35,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
     Timer(const Duration(seconds: 6), () {
       if (mounted) {
-        GoRouter.of(context).pushReplacement(AppRouter.kHotelsView);
+        GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
       }
     });
   }
@@ -65,7 +65,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
             ScaleTransition(
               scale: _animation,
               child: Image.asset(
-                AssetsData.logo,
+                AssetsData.splashLogo,
                 width: width * 0.4,
               ),
             ),

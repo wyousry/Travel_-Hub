@@ -29,7 +29,7 @@ class CustomField extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyle(color: Colors.black, fontSize: 14.r),
+          style: TextStyle(color: kBlack, fontSize: 14.r),
         ),
         Container(
           margin: EdgeInsets.symmetric(vertical: 8.r, horizontal: 4.r),
@@ -43,7 +43,7 @@ class CustomField extends StatelessWidget {
           child: TextFormField(
             controller: controller,
             validator: validator,
-            cursorColor: Colors.grey,
+            cursorColor: kGrey,
             cursorWidth: 1.5.w,
             onTap: onTap,
             keyboardType: keyboard,

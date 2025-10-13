@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:travel_hub/features/auth/login/login_screen.dart';
+import 'package:travel_hub/features/auth/login/presentation/views/login_screen.dart';
 import 'package:travel_hub/features/home/home_screen.dart';
 import 'package:travel_hub/features/hotels/booking/book_screen.dart';
 import 'package:travel_hub/features/hotels/hotels_screen.dart';
