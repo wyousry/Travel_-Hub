@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:travel_hub/constant.dart';
-import 'package:travel_hub/features/hotels/presentation/widgets/custom_button.dart';
-import 'package:travel_hub/features/hotels/presentation/widgets/custom_field.dart';
+import 'package:travel_hub/navigation/hotels/presentation/widgets/custom_button.dart';
+import 'package:travel_hub/navigation/hotels/presentation/widgets/custom_field.dart';
 
 class BookScreen extends StatefulWidget {
   const BookScreen({super.key});

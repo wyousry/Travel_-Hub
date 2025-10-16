@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 const kBackgroundColor = Colors.blue;
-const kSplashColor = Color(0xff5D5D5E);
 const textFeild = Color(0xffECEFF1);
 const kRed = Colors.red;
 const kLoginIconColor= Color(0xff9810FA);
@@ -11,7 +10,10 @@ const kPriceColor = Color(0xff155DFC);
 const kGrey = Colors.grey;
 const kText = Color(0xff555555);
 const kAssets = Color(0xff717182);
-
+const kLightBlue = Colors.lightBlue;
+const kOrange = Colors.orange;
+const kGreen = Colors.green;
+const kPurple = Colors.purple;
 const linearGradient = LinearGradient(
   colors: [Color(0xFF007BFF), Color(0xFFFF6600)],
   begin: Alignment.topLeft,

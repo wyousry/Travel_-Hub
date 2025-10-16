@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:travel_hub/constant.dart';
+import 'package:travel_hub/core/custom_app_bar.dart';
 import 'package:travel_hub/core/utils/app_router.dart';
-import 'package:travel_hub/features/hotels/presentation/widgets/custom_button.dart';
+import 'package:travel_hub/navigation/hotels/presentation/widgets/custom_button.dart';
+import 'package:travel_hub/navigation/hotels/presentation/widgets/hotels_header.dart';
 
 class HotelsScreen extends StatefulWidget {
   const HotelsScreen({super.key});
@@ -16,30 +18,10 @@ class _hotelsScreen extends State<HotelsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: kWhite,
-        title: Align(
-          alignment: Alignment.center,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                "Hotels",
-                style: TextStyle(
-                    color: kBlack,
-                    fontSize: 24.sp
-                ),
-              ),
-              Text(
-                "Find your perfect stay",
-                style: TextStyle(
-                    color: kAssets,
-                    fontSize: 16.sp
-                ),
-              ),
-            ],
-          ),
-        ),
+      appBar: CustomAppBar(
+        title: "Hotels",
+        bottomWidget: const HotelsHeader(),
+        centerTitle: true,
       ),
       backgroundColor: kWhite,
       body: Padding(
@@ -48,7 +30,7 @@ class _hotelsScreen extends State<HotelsScreen> {
           itemBuilder: (context, index) {
             return Card(
               elevation: 5.r,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
               margin: EdgeInsets.all(5.r),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

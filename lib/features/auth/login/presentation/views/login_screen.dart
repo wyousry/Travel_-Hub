@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:travel_hub/constant.dart';
 import '../widgets/login_header.dart';
 import '../widgets/login_form.dart';
-
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
