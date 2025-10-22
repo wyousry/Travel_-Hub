@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:travel_hub/core/custom_app_bar.dart';
 
 class FullMapScreen extends StatelessWidget {
   const FullMapScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final isWide = size.width >= 600;
     return Scaffold(
-      appBar: AppBar(
-
+      appBar: CustomAppBar(
+        title: "Map",
       ),
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(isWide ? 24 : 16),
+          padding: EdgeInsets.all( 24),
           child: Text(
-            "🗺️ This is the full map view",
+            "This is the full map view",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: isWide ? 18 : 16),
+            style: TextStyle(fontSize: 16),
           ),
         ),
       ),
