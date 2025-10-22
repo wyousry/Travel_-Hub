@@ -10,6 +10,7 @@ const kPriceColor = Color(0xff155DFC);
 const kGrey = Colors.grey;
 const kText = Color(0xff555555);
 const kAssets = Color(0xff717182);
+const kStar = Color(0xffF0B100);
 const kLightBlue = Colors.lightBlue;
 const kOrange = Colors.orange;
 const kGreen = Colors.green;

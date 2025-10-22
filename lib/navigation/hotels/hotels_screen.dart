@@ -1,121 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-import 'package:travel_hub/constant.dart';
 import 'package:travel_hub/core/custom_app_bar.dart';
-import 'package:travel_hub/core/utils/app_router.dart';
-import 'package:travel_hub/navigation/hotels/presentation/widgets/custom_button.dart';
-import 'package:travel_hub/navigation/hotels/presentation/widgets/hotels_header.dart';
+import 'package:travel_hub/navigation/hotels/data/cubit/hotels_cubit.dart';
+import 'package:travel_hub/navigation/hotels/data/cubit/hotels_state.dart';
+import 'package:travel_hub/navigation/hotels/presentation/widgets/hotel_list.dart';
 
 class HotelsScreen extends StatefulWidget {
   const HotelsScreen({super.key});
 
   @override
-  State<HotelsScreen> createState() => _hotelsScreen();
+  State<HotelsScreen> createState() => _HotelsScreenState();
 }
 
-class _hotelsScreen extends State<HotelsScreen> {
+class _HotelsScreenState extends State<HotelsScreen> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textColor = theme.textTheme.bodyMedium?.color;
+
     return Scaffold(
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: CustomAppBar(
         title: "Hotels",
-        bottomWidget: const HotelsHeader(),
+        bottomWidget: Text(
+          "Find your perfect stay",
+          style: TextStyle(color: textColor?.withOpacity(0.7), fontSize: 16.sp),
+        ),
         centerTitle: true,
       ),
-      backgroundColor: kWhite,
       body: Padding(
-        padding: EdgeInsetsGeometry.all(16.r),
-        child: ListView.builder(
-          itemBuilder: (context, index) {
-            return Card(
-              elevation: 5.r,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
-              margin: EdgeInsets.all(5.r),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // ClipRRect(
-                  //   borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-                  //   child: Image.network(
-                  //     fit: BoxFit.cover,
-                  //   ),
-                  // ),
-                  Padding(
-                    padding: EdgeInsets.all(12.r),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Grand Palace Hotel",
-                                    style: TextStyle(
-                                        color: kBlack,
-                                        fontSize: 16.sp
-                                    ),
-                                  ),
-                                )
-                            ),
-                            Expanded(
-                                child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    "\$289",
-                                    style: TextStyle(
-                                        color: kPriceColor,
-                                        fontSize: 16.sp
-                                    ),
-                                  ),
-                                )
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Paris, France",
-                                    style: TextStyle(
-                                        color: kAssets,
-                                        fontSize: 14.sp
-                                    ),
-                                  ),
-                                )
-                            ),
-                            Expanded(
-                                child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    "per night",
-                                    style: TextStyle(
-                                        color: kAssets,
-                                        fontSize: 14.sp
-                                    ),
-                                  ),
-                                )
-                            ),
-                          ],
-                        ),
-                        CustomButton(
-                          buttonText: "Book Now",
-                          onPressed: (){
-                            GoRouter.of(context).push(AppRouter.kBookView);
-
-                          },
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            );
+        padding: EdgeInsets.all(16.r),
+        child: BlocBuilder<HotelsCubit, HotelsState>(
+          builder: (context, state) {
+            if (state is HotelsLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is HotelsError) {
+              return Center(
+                child: Text(
+                  state.massage,
+                  style: TextStyle(color: theme.colorScheme.error),
+                ),
+              );
+            } else if (state is HotelsSuccess) {
+              return HotelsList(state: state);
+            } else {
+              return const SizedBox();
+            }
           },
-          itemCount: 10,
         ),
       ),
     );

@@ -1,8 +1,10 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:travel_hub/features/ai_camera/ai_camera.dart';
 import 'package:travel_hub/features/auth/login/presentation/views/login_screen.dart';
 import 'package:travel_hub/navigation/home/home_screen.dart';
 import 'package:travel_hub/navigation/hotels/booking/book_screen.dart';
+import 'package:travel_hub/navigation/hotels/data/cubit/hotels_cubit.dart';
 import 'package:travel_hub/navigation/hotels/hotels_screen.dart';
 import 'package:travel_hub/features/splash/splash_screen.dart';
 import 'package:travel_hub/navigation/main_screen.dart';
@@ -57,10 +59,14 @@ abstract class AppRouter {
         builder: (context, state) => const FullMapScreen(),
       ),
 
-      GoRoute(
+   GoRoute(
         path: kHotelsView,
-        builder: (context, state) => const HotelsScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => HotelsCubit()..loadHotels(),
+          child: const HotelsScreen(),
+        ),
       ),
+
       GoRoute(path: kBookView, builder: (context, state) => const BookScreen()),
     ],
   );

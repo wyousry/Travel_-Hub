@@ -1,37 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:travel_hub/constant.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final Widget? bottomWidget; 
+  final Widget? bottomWidget;
   final bool centerTitle;
-  final Color backgroundColor;
 
   const CustomAppBar({
     super.key,
     required this.title,
     this.bottomWidget,
     this.centerTitle = true,
-    this.backgroundColor = kWhite,
   });
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final appBarTheme = theme.appBarTheme;
+
     return AppBar(
-      backgroundColor: backgroundColor,
-      elevation: 0,
+      elevation: appBarTheme.elevation ?? 0,
+      backgroundColor:
+          appBarTheme.backgroundColor ?? theme.scaffoldBackgroundColor,
       centerTitle: centerTitle,
+      iconTheme: appBarTheme.iconTheme ??
+          IconThemeData(color: appBarTheme.foregroundColor ?? Colors.black87),
       title: Column(
-        crossAxisAlignment: centerTitle ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+        crossAxisAlignment:
+            centerTitle ? CrossAxisAlignment.center : CrossAxisAlignment.start,
         children: [
           Text(
             title,
-            style: TextStyle(
-              color: kBlack,
-              fontSize: 22.sp,
-              fontWeight: FontWeight.bold,
-            ),
+            style: appBarTheme.titleTextStyle ??
+                theme.textTheme.titleLarge?.copyWith(
+                  fontSize: 24.sp,
+                
+                  color: appBarTheme.foregroundColor ??
+                      theme.colorScheme.onBackground,
+                ),
           ),
           if (bottomWidget != null) ...[
             SizedBox(height: 4.h),

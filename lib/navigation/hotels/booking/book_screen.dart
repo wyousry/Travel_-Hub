@@ -118,7 +118,8 @@ class _BookScreenState extends State<BookScreen> {
                         }
                         return null;
                       },
-                      icon: Icons.calendar_today
+                      icon: Icons.calendar_today,
+                      hint: "DD/MM/YYYY",
                     ),
                   ),
                   Expanded(
@@ -146,7 +147,8 @@ class _BookScreenState extends State<BookScreen> {
                         }
                         return null;
                       },
-                      icon: Icons.calendar_today
+                      icon: Icons.calendar_today,
+                      hint: "DD/MM/YYYY",
                     ),
                   ),
                 ],

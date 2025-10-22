@@ -47,6 +47,9 @@ class CustomField extends StatelessWidget {
             cursorWidth: 1.5.w,
             onTap: onTap,
             keyboardType: keyboard,
+            onTapOutside: (event) {
+              FocusScope.of(context).unfocus();
+            },
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(14.r),
