@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:travel_hub/constant.dart';
 
+
 class SocialButton extends StatelessWidget {
   final IconData icon;
   final String text;
   final Color color;
+  final VoidCallback? onPressed;
 
   const SocialButton({
     super.key,
     required this.icon,
     required this.text,
-    required this.color,
+    required this.color, 
+    this.onPressed,
   });
 
   @override

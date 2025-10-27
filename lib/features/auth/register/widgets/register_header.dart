@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:travel_hub/constant.dart';
+import 'package:travel_hub/core/utils/app_router.dart';
 import 'package:travel_hub/core/utils/assets.dart';
 
 
-class LoginHeader extends StatelessWidget {
-  const LoginHeader({super.key});
+class RegisterHeader extends StatelessWidget {
+  const RegisterHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,15 +15,20 @@ class LoginHeader extends StatelessWidget {
 
     return Column(
       children: [
-        /* Align(
+        Align(
           alignment: Alignment.topLeft,
-          child: CircleAvatar(
-            radius: width * 0.05,
-            backgroundColor: kWhite.withOpacity(0.3),
-            child: const Icon(Icons.arrow_back, color: kText),
+          child: InkWell(
+            onTap: () {
+               GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
+            },
+            child: CircleAvatar(
+              radius: width * 0.05,
+              backgroundColor: kWhite.withOpacity(0.3),
+              child: const Icon(Icons.arrow_back, color: kText),
+            ),
           ),
         ),
-        SizedBox(height: height * 0.05),*/
+        SizedBox(height: height * 0.05),
        Container(
   width: width * 0.26,
   height: width * 0.26,
@@ -40,7 +47,7 @@ class LoginHeader extends StatelessWidget {
 ,
         SizedBox(height: height * 0.03),
         Text(
-          "Welcome Back",
+          "Join TravelHub",
           style: TextStyle(
             fontSize: width * 0.07,
             color: kWhite,
@@ -48,7 +55,7 @@ class LoginHeader extends StatelessWidget {
           ),
         ),
         Text(
-          "Sign in to continue your journey",
+          "Create your account to start exploring",
           style: TextStyle(fontSize: width * 0.04, color: Colors.white70),
         ),
       ],

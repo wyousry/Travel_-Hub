@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:travel_hub/features/ai_camera/ai_camera.dart';
 import 'package:travel_hub/features/auth/login/presentation/views/login_screen.dart';
+import 'package:travel_hub/features/auth/register/view/register_screen.dart';
 import 'package:travel_hub/navigation/home/home_screen.dart';
 import 'package:travel_hub/navigation/hotels/booking/book_screen.dart';
 import 'package:travel_hub/navigation/hotels/data/cubit/hotels_cubit.dart';
@@ -13,9 +14,8 @@ import 'package:travel_hub/navigation/places/places_screen.dart';
 
 abstract class AppRouter {
   static const kLoginView = '/loginView';
-  static const kRegisterOneView = '/registerOneView';
-  static const kRegisterTwoView = '/registerTwoView';
-  static const kRegisterThreeView = '/registerThreeView';
+  static const kRegisterView = '/registerView';
+ 
 
   //Navigation Feature
   static const kNavigationView = '/navigation';
@@ -36,10 +36,10 @@ abstract class AppRouter {
         path: kLoginView,
         builder: (context, state) => const LoginScreen(),
       ),
-      // GoRoute(
-      //path: kRegisterOneView,
-      // builder: (context, state) => const RegisterOneView(),
-      //  ),
+      GoRoute(
+      path: kRegisterView,
+       builder: (context, state) => const RegisterScreen(),
+       ),
 
       //Home Feature
       GoRoute(path: kHomeView, builder: (context, state) => const HomeScreen()),

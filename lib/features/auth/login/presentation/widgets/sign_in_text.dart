@@ -2,21 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:travel_hub/constant.dart';
 import 'package:travel_hub/core/utils/app_router.dart';
-
-
-class SignUpText extends StatelessWidget {
-  const SignUpText({super.key});
+class SignInText extends StatelessWidget {
+  const SignInText({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text("Don’t have an account? ", style: TextStyle(color: kBlack)),
+        const Text("Already have an account? ", style: TextStyle(color: kBlack)),
         GestureDetector(
-          onTap: () {GoRouter.of(context).pushReplacement(AppRouter.kRegisterView);},
+          onTap: () {GoRouter.of(context).pushReplacement(AppRouter.kLoginView);},
           child: const Text(
-            "Sign Up",
+            "Sign In",
             style: TextStyle(
               color: kBackgroundColor,
               fontWeight: FontWeight.bold,
