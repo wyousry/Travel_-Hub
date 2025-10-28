@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SettingsList extends StatelessWidget {
   const SettingsList({super.key});
@@ -9,17 +10,17 @@ class SettingsList extends StatelessWidget {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return ListView(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: EdgeInsetsDirectional.symmetric(horizontal: 20.w, vertical: 10.h),
       children: [
         _buildSectionTitle(tr('account'), color: Colors.blueAccent),
         _buildSettingItem(Icons.lock_outline, tr('privacy')),
         _buildSettingItem(Icons.notifications_none, tr('notifications')),
         _buildLanguageItem(context),
-        const SizedBox(height: 15),
+         SizedBox(height: 15.h),
         _buildSectionTitle(tr('support'), color: Colors.blueAccent),
         _buildSettingItem(Icons.help_outline, tr('help')),
         _buildSettingItem(Icons.feedback_outlined, tr('feedback')),
-        const SizedBox(height: 15),
+         SizedBox(height: 15.h),
         _buildSectionTitle(tr('more'), color: Colors.blueAccent),
         _buildSettingItem(Icons.info_outline, tr('about')),
         _buildSettingItem(Icons.logout, tr('logout'), color: Colors.red),
@@ -29,11 +30,11 @@ class SettingsList extends StatelessWidget {
 
   Widget _buildSectionTitle(String title, {Color? color}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      padding:  EdgeInsetsDirectional.symmetric(vertical: 8.0.h),
       child: Text(
         title,
         style: TextStyle(
-          fontSize: 15,
+          fontSize: 15.sp,
           fontWeight: FontWeight.bold,
           color: color ?? Colors.black87,
         ),
@@ -45,7 +46,7 @@ class SettingsList extends StatelessWidget {
     return ListTile(
       leading: Icon(icon, color: color ?? Colors.blueAccent),
       title: Text(title, style: TextStyle(color: color)),
-      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+      trailing:  Icon(Icons.arrow_forward_ios, size: 16.sp),
       onTap: () {},
     );
   }
@@ -54,7 +55,7 @@ class SettingsList extends StatelessWidget {
     return ListTile(
       leading: const Icon(Icons.language_outlined, color: Colors.blueAccent),
       title: Text(tr('language')),
-      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+      trailing:  Icon(Icons.arrow_forward_ios, size: 16.sp),
       onTap: () => _showLanguageDialog(context),
     );
   }
@@ -68,11 +69,11 @@ class SettingsList extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: bgColor,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
         title: Row(
           children: [
             const Icon(Icons.language, color: Colors.blueAccent),
-            const SizedBox(width: 8),
+             SizedBox(width: 8.w),
             Text(
               tr('choose_language'),
               style: TextStyle(
@@ -115,27 +116,27 @@ class SettingsList extends StatelessWidget {
         context.setLocale(locale);
         Navigator.pop(context);
       },
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(12.r),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+        padding:  EdgeInsetsDirectional.symmetric(vertical: 10.h, horizontal: 12.w),
         decoration: BoxDecoration(
           color: isSelected ? Colors.blueAccent.withOpacity(0.15) : Colors.transparent,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
         ),
         child: Row(
           children: [
             Icon(
               isSelected ? Icons.check_circle : Icons.circle_outlined,
               color: isSelected ? Colors.blueAccent : textColor.withOpacity(0.6),
-              size: 20,
+              size: 20.sp,
             ),
-            const SizedBox(width: 10),
+             SizedBox(width: 10.w),
             Text(
               label,
               style: TextStyle(
                 color: textColor,
                 fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                fontSize: 16,
+                fontSize: 16.sp,
               ),
             ),
           ],

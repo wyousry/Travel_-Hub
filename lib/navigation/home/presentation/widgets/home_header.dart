@@ -9,7 +9,7 @@ class HomeHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: EdgeInsets.only(bottom: 12.h),
+        padding: EdgeInsetsDirectional.only(bottom: 12.h),
         child: Text(
           "Discover amazing places around the world",
           textAlign: TextAlign.center,

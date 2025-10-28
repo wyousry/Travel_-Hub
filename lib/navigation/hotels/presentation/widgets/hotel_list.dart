@@ -60,13 +60,13 @@ class HotelCard extends StatelessWidget {
       color: theme.cardColor,
       shadowColor: isDark ? Colors.white54 : Colors.black26, 
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
-      margin: EdgeInsets.all(8.r),
+      margin: EdgeInsetsDirectional.all(8.r),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _HotelImage(imageUrl: hotel.imageUrl, stars: hotel.stars.toDouble()),
           Padding(
-            padding: EdgeInsets.all(12.r),
+            padding: EdgeInsetsDirectional.all(12.r),
             child: Column(
               children: [
                 _HotelInfoRow(
@@ -119,7 +119,7 @@ class _HotelImage extends StatelessWidget {
           ),
         ),
         Container(
-          margin: EdgeInsets.all(8.r),
+          margin: EdgeInsetsDirectional.all(8.r),
           width: 62.w,
           height: 28.h,
           decoration: BoxDecoration(

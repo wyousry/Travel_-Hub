@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:travel_hub/navigation/hotels/models/hotels_model.dart';
 

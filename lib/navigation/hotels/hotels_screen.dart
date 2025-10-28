@@ -30,7 +30,7 @@ class _HotelsScreenState extends State<HotelsScreen> {
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.r),
+        padding: EdgeInsetsDirectional.all(16.r),
         child: BlocBuilder<HotelsCubit, HotelsState>(
           builder: (context, state) {
             if (state is HotelsLoading) {

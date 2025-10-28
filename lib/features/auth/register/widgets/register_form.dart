@@ -63,6 +63,8 @@ class _RegisterFormState extends State<RegisterForm> {
 
     if (name.text.trim().isNotEmpty) {
       await cred.user?.updateDisplayName(name.text.trim());
+      await cred.user?.reload();
+
     }
 
     if (!mounted) return;
@@ -147,7 +149,7 @@ class _RegisterFormState extends State<RegisterForm> {
 
     return SingleChildScrollView(
       child: Container(
-        padding: EdgeInsets.symmetric(
+        padding: EdgeInsetsDirectional.symmetric(
           horizontal: width * 0.05,
           vertical: height * 0.03,
         ),

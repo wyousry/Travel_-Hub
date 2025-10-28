@@ -55,7 +55,6 @@ class _BookScreenState extends State<BookScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        
         backgroundColor: kBackgroundColor,
         automaticallyImplyLeading: false,
         title: Column(
@@ -173,7 +172,7 @@ class _BookScreenState extends State<BookScreen> {
               Text(
                 "Contact Information",
                 style: TextStyle(
-                  color: Colors.black,
+                  color: kBlack,
                   fontSize: 18.sp
                 ),
               ),

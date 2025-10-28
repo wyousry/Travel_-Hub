@@ -1,9 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_hub/core/utils/assets.dart';
 
-class SettingsHeader extends StatelessWidget {
+class SettingsHeader extends StatefulWidget {
   final bool isDarkMode;
   final VoidCallback onToggleTheme;
 
@@ -14,12 +15,34 @@ class SettingsHeader extends StatelessWidget {
   });
 
   @override
+  State<SettingsHeader> createState() => _SettingsHeaderState();
+}
+
+class _SettingsHeaderState extends State<SettingsHeader> {
+  String? userName;
+  String? userEmail;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userName = prefs.getString('userName') ?? 'User Name';
+      userEmail = prefs.getString('userEmail') ?? 'user@email.com';
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
     return Container(
-      padding: EdgeInsets.all(20.r),
+      padding: EdgeInsetsDirectional.all(20.r),
       color: theme.appBarTheme.backgroundColor,
       child: Row(
         children: [
@@ -33,7 +56,7 @@ class SettingsHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Abdelrahman Mohammed',
+                  userName ?? '',
                   style: theme.textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: 18.sp,
@@ -41,7 +64,7 @@ class SettingsHeader extends StatelessWidget {
                 ),
                 SizedBox(height: 5.h),
                 Text(
-                  'abdoelsedemy8@gmail.com',
+                  userEmail ?? '',
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7),
                   ),
@@ -50,10 +73,10 @@ class SettingsHeader extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: onToggleTheme,
+            onTap: widget.onToggleTheme,
             borderRadius: BorderRadius.circular(12.r),
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 8.h),
+              padding: EdgeInsetsDirectional.symmetric(horizontal: 12.h, vertical: 8.h),
               decoration: BoxDecoration(
                 color: isDark ? Colors.grey[800] : Colors.grey[200],
                 borderRadius: BorderRadius.circular(12.r),

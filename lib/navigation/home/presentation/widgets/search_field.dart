@@ -14,7 +14,7 @@ class SearchField extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.r),
         ),
         isDense: true,
-        contentPadding: EdgeInsets.symmetric(
+        contentPadding: EdgeInsetsDirectional.symmetric(
           horizontal: 12.w,
           vertical: 12.h,
         ),

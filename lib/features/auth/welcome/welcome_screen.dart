@@ -20,7 +20,7 @@ class TravelWelcomeScreen extends StatelessWidget {
         decoration: const BoxDecoration(gradient: loginGradient),
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(
+            padding: EdgeInsetsDirectional.symmetric(
               horizontal: width * 0.06,
               vertical: height * 0.02,
             ),
@@ -104,7 +104,7 @@ class TravelWelcomeScreen extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(width * 0.03),
                     ),
-                    padding: EdgeInsets.symmetric(
+                    padding: EdgeInsetsDirectional.symmetric(
                       horizontal: width * 0.25,
                       vertical: height * 0.018,
                     ),

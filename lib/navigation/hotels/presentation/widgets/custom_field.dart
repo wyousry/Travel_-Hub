@@ -32,7 +32,7 @@ class CustomField extends StatelessWidget {
           style: TextStyle(color: kBlack, fontSize: 14.r),
         ),
         Container(
-          margin: EdgeInsets.symmetric(vertical: 8.r, horizontal: 4.r),
+          margin: EdgeInsetsDirectional.symmetric(vertical: 8.r, horizontal: 4.r),
           // decoration: BoxDecoration(
           //   borderRadius: BorderRadius.circular(14.r),
           //   color: Color(0xffF3F3F5),

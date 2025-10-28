@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8),
+      padding: const EdgeInsetsDirectional.only(top: 8),
       child: Scaffold(
         appBar:CustomAppBar(
           title: " Welcome to Travel Hub",
@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
         ),
       
         body: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          padding: EdgeInsetsDirectional.symmetric(horizontal: 20.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

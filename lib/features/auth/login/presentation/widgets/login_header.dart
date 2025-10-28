@@ -30,7 +30,7 @@ class LoginHeader extends StatelessWidget {
     gradient: loginGradient,
   ),
   child: Padding(
-    padding: EdgeInsets.all(width * 0.07),
+    padding: EdgeInsetsDirectional.all(width * 0.07),
     child: Image.asset(
       AssetsData.loginLogo,
       fit: BoxFit.contain,

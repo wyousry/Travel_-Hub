@@ -21,7 +21,7 @@ class RegisterScreen extends StatelessWidget {
           child: LayoutBuilder(
             builder: (context, constraints) {
               return SingleChildScrollView(
-                padding: EdgeInsets.symmetric(
+                padding: EdgeInsetsDirectional.symmetric(
                   horizontal: size.width * 0.08,
                   vertical: size.height * 0.08,
                 ),
