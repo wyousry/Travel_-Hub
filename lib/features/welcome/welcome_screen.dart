@@ -1,11 +1,20 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:travel_hub/constant.dart';
 import 'package:travel_hub/core/utils/app_router.dart';
-import 'package:travel_hub/features/auth/welcome/future_item.dart';
+import 'package:travel_hub/features/welcome/future_item.dart';
 
 class TravelWelcomeScreen extends StatelessWidget {
   const TravelWelcomeScreen({super.key});
+
+  void changeLanguage(BuildContext context) {
+    if (context.locale == const Locale('en')) {
+      context.setLocale(const Locale('ar'));
+    } else {
+      context.setLocale(const Locale('en'));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +23,25 @@ class TravelWelcomeScreen extends StatelessWidget {
     final width = size.width;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          IconButton(
+            onPressed: () => changeLanguage(context),
+            icon: const Icon(Icons.language),
+            color: Colors.white,
+          ),
+        ],
+      ),
+      extendBodyBehindAppBar: true,
       body: Container(
         width: width,
         height: height,
         decoration: const BoxDecoration(gradient: loginGradient),
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsetsDirectional.symmetric(
+            padding: EdgeInsets.symmetric(
               horizontal: width * 0.06,
               vertical: height * 0.02,
             ),
@@ -42,7 +63,7 @@ class TravelWelcomeScreen extends StatelessWidget {
                 ),
                 SizedBox(height: height * 0.03),
                 Text(
-                  'TravelMate',
+                  'app_name'.tr(),
                   style: TextStyle(
                     color: kWhite,
                     fontSize: width * 0.07,
@@ -51,36 +72,36 @@ class TravelWelcomeScreen extends StatelessWidget {
                 ),
                 SizedBox(height: height * 0.01),
                 Text(
-                  'Discover. Explore. Experience.',
+                  'Discover_Explore_Experience'.tr(),
                   style: TextStyle(
                     color: kWhite,
                     fontSize: width * 0.04,
                   ),
                 ),
                 SizedBox(height: height * 0.045),
-                const FeatureItem(
+                 FeatureItem(
                   icon: Icons.location_on,
-                  title: 'Discover Amazing Places',
+                  title: 'discover_amazing_places'.tr(),
                   description:
-                      'Find hidden gems and popular destinations worldwide',
+                      'discover_description'.tr(),
                 ),
                 SizedBox(height: height * 0.025),
-                const FeatureItem(
+                 FeatureItem(
                   icon: Icons.camera_alt,
-                  title: 'AI-Powered Recognition',
+                  title: 'ai_powered_recognition'.tr(),
                   description:
-                      'Identify landmarks instantly with our smart camera',
+                      'ai_description'.tr(),
                 ),
                 SizedBox(height: height * 0.025),
-                const FeatureItem(
+                 FeatureItem(
                   icon: Icons.person,
-                  title: 'Personalized Experience',
+                  title: 'personalized_experience'.tr(),
                   description:
-                      'Get recommendations tailored to your preferences',
+                      'personalized_description'.tr(),
                 ),
                 const Spacer(),
                 Text(
-                  'Ready to start your journey?',
+                  'ready_to_start_your_journey?'.tr(),
                   style: TextStyle(
                     color: kWhite,
                     fontSize: width * 0.04,
@@ -88,7 +109,7 @@ class TravelWelcomeScreen extends StatelessWidget {
                 ),
                 SizedBox(height: height * 0.006),
                 Text(
-                  'Join millions of travelers exploring the world',
+                  'join_millions_of_travelers_exploring_the_world_with_TravelHub'.tr(),
                   style: TextStyle(
                     color: kWhite,
                     fontSize: width * 0.035,
@@ -97,20 +118,21 @@ class TravelWelcomeScreen extends StatelessWidget {
                 SizedBox(height: height * 0.03),
                 ElevatedButton(
                   onPressed: () {
-                  GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
+                    GoRouter.of(context)
+                        .pushReplacement(AppRouter.kLoginView);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: kPriceColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(width * 0.03),
                     ),
-                    padding: EdgeInsetsDirectional.symmetric(
+                    padding: EdgeInsets.symmetric(
                       horizontal: width * 0.25,
                       vertical: height * 0.018,
                     ),
                   ),
                   child: Text(
-                    "Get Started",
+                    "get_started".tr(),
                     style: TextStyle(
                       fontSize: width * 0.045,
                       fontWeight: FontWeight.w600,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_hub/constant.dart';
 import 'package:travel_hub/core/utils/assets.dart';
@@ -40,7 +41,7 @@ class LoginHeader extends StatelessWidget {
 ,
         SizedBox(height: height * 0.03),
         Text(
-          "Welcome Back",
+          "welcome_back".tr(),
           style: TextStyle(
             fontSize: width * 0.07,
             color: kWhite,

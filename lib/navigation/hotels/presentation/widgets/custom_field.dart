@@ -11,6 +11,7 @@ class CustomField extends StatelessWidget {
   final String? Function(String?)? validator;
   final Function()? onTap;
   final TextInputType? keyboard;
+
   const CustomField({
     super.key,
     required this.title,
@@ -20,8 +21,9 @@ class CustomField extends StatelessWidget {
     required this.controller,
     required this.validator,
     this.onTap,
-    this.keyboard
+    this.keyboard,
   });
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,38 +31,36 @@ class CustomField extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyle(color: kBlack, fontSize: 14.r),
+          style: TextStyle(color: kBlack, fontSize: 14.r, fontWeight: FontWeight.w400),
         ),
         Container(
-          margin: EdgeInsetsDirectional.symmetric(vertical: 8.r, horizontal: 4.r),
-          // decoration: BoxDecoration(
-          //   borderRadius: BorderRadius.circular(14.r),
-          //   color: Color(0xffF3F3F5),
-          //   boxShadow: [
-          //     BoxShadow(color: Colors.black.withOpacity(0.5), blurRadius: 1),
-          //   ],
-          // ),
+          margin: EdgeInsets.symmetric(vertical: 8.r, horizontal: 4.r),
           child: TextFormField(
             controller: controller,
             validator: validator,
             cursorColor: kGrey,
+
             cursorWidth: 1.5.w,
             onTap: onTap,
             keyboardType: keyboard,
-            onTapOutside: (event) {
-              FocusScope.of(context).unfocus();
-            },
+            onTapOutside: (_) => FocusScope.of(context).unfocus(),
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(14.r),
                 borderSide: BorderSide(color: kAssets),
               ),
-              prefixIcon: Icon(icon, color: kAssets, size: 20.r),
+            
+              prefixIcon: icon != null
+                  ? Icon(icon, color: kAssets, size: 24.r)
+                  : null,
               hintText: hint,
               hintStyle: TextStyle(color: kAssets),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(14.r),
               ),
+              contentPadding: icon == null
+                  ? EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h)
+                  : null, 
             ),
           ),
         ),

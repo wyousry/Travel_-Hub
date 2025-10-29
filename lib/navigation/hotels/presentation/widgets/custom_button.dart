@@ -6,11 +6,15 @@ class CustomButton extends StatelessWidget {
   final String buttonText;
   final Function()? onPressed;
   final IconData? icon;
+  final Color? buttonColor;
+  final Color? textColor;
   const CustomButton({
     super.key,
     required this.buttonText,
     this.onPressed,
     this.icon,
+    this.buttonColor,
+    this.textColor
   });
 
   @override
@@ -18,11 +22,11 @@ class CustomButton extends StatelessWidget {
     return Container(
       height: 60.h,
       width: double.infinity,
-      margin: EdgeInsetsDirectional.symmetric(vertical: 8.r, horizontal: 4.r),
+      margin: EdgeInsets.symmetric(vertical: 8.r, horizontal: 4.r),
       child: ElevatedButton(
         onPressed: onPressed,
         style: ButtonStyle(
-          backgroundColor: WidgetStatePropertyAll(kBackgroundColor),
+          backgroundColor: WidgetStatePropertyAll(buttonColor??kBackgroundColor),
           shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
           ),
@@ -33,7 +37,7 @@ class CustomButton extends StatelessWidget {
             Icon(icon, color: kWhite, size: 20.r),
             Text(
               buttonText,
-              style: TextStyle(color: kWhite, fontSize: 16.sp),
+              style: TextStyle(color: textColor??kWhite, fontSize: 16.sp),
             ),
           ],
         ),

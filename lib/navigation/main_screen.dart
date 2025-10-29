@@ -4,7 +4,8 @@ import 'package:travel_hub/constant.dart';
 import 'package:travel_hub/navigation/home/home_screen.dart';
 import 'package:travel_hub/navigation/hotels/data/cubit/hotels_cubit.dart';
 import 'package:travel_hub/navigation/hotels/hotels_screen.dart';
-import 'package:travel_hub/navigation/places/places_screen.dart';
+import 'package:travel_hub/navigation/land_mark/data/cubit/land_mark_cubit.dart';
+import 'package:travel_hub/navigation/land_mark/land_mark_screen.dart';
 import 'package:travel_hub/navigation/maps/full_map_screen.dart';
 import 'package:travel_hub/navigation/setting/setting_screen.dart';
 
@@ -36,7 +37,10 @@ void initState() {
       create: (context) => HotelsCubit()..loadHotels(),
       child: const HotelsScreen(),
     ),
-    const PlacesScreen(),
+     BlocProvider(
+      create: (context) => LandMarkCubit()..loadLandMark(),
+      child: const LandMarkScreen(),
+    ),
     const FullMapScreen(),
     SettingScreen(
       isDarkMode: _isDarkMode,

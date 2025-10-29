@@ -8,7 +8,10 @@ class Hotels {
   final int reviewsCount;
   final int stars;
   final String lastUpdated;
-  final int pricePerNight;
+  final double pricePerNight;
+  final double latitude;
+  final double longitude;
+  final List<String> facilities;
 
   Hotels({
     required this.name,
@@ -21,15 +24,18 @@ class Hotels {
     required this.stars,
     required this.lastUpdated,
     required this.pricePerNight,
+    required this.latitude,
+    required this.longitude,
+    required this.facilities,
   });
 
   factory Hotels.fromJson(Map<String, dynamic> json) {
     final List<dynamic> rooms = json['rooms'] ?? [];
-    int extractedPrice = 0;
+    double extractedPrice = 0.0;
 
     if (rooms.isNotEmpty) {
       final firstRoom = rooms.first;
-      extractedPrice = (firstRoom['price_egp_per_night'] ?? 0);
+      extractedPrice = (firstRoom['price_egp_per_night'] ?? 0).toDouble();
     }
 
     return Hotels(
@@ -45,6 +51,9 @@ class Hotels {
       stars: json['stars'] ?? 0,
       lastUpdated: json['last_updated'] ?? '',
       pricePerNight: extractedPrice,
+      latitude: (json['latitude'] ?? 0).toDouble(),
+      longitude: (json['longitude'] ?? 0).toDouble(),
+      facilities: List<String>.from(json['facilities'] ?? []),
     );
   }
 }

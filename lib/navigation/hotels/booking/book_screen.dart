@@ -56,9 +56,15 @@ class _BookScreenState extends State<BookScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
-        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               "Book Your Trip",
@@ -163,22 +169,15 @@ class _BookScreenState extends State<BookScreen> {
                   }
                   return null;
                 },
-                icon: Icons.person,
+                icon: Icons.people_alt_outlined 
+                ,
               ),
-              Divider(
-                color: Color(0xffF3F3F5),
-                thickness: 1,
-              ),
+              Divider(color: Color(0xffF3F3F5), thickness: 2.h),
               Text(
                 "Contact Information",
-                style: TextStyle(
-                  color: kBlack,
-                  fontSize: 18.sp
-                ),
+                style: TextStyle(color: kBlack, fontSize: 18.sp),
               ),
-              SizedBox(
-                height: 12.h,
-              ),
+              SizedBox(height: 12.h),
               CustomField(
                 title: "Full Name",
                 width: double.infinity,
@@ -199,7 +198,7 @@ class _BookScreenState extends State<BookScreen> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "Please enter your email";
-                  }else if (!value.contains("@")){
+                  } else if (!value.contains("@")) {
                     return "Please enter a valid email";
                   }
                   return null;
@@ -214,8 +213,8 @@ class _BookScreenState extends State<BookScreen> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "Please enter your phone number";
-                  }else if (!RegExp(r'^01[0-9]{9}$').hasMatch(value)) {
-                     return 'please enter a valid Egyptian phone number';
+                  } else if (!RegExp(r'^01[0-9]{9}$').hasMatch(value)) {
+                    return 'please enter a valid Egyptian phone number';
                   }
                   return null;
                 },
@@ -224,10 +223,10 @@ class _BookScreenState extends State<BookScreen> {
               CustomButton(
                 buttonText: "Complete Booking",
                 icon: Icons.payment,
-                onPressed: (){
+                onPressed: () {
                   if (formKey.currentState!.validate()) {}
                 },
-              )
+              ),
             ],
           ),
         ),

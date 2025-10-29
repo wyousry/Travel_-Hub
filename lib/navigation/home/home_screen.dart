@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                         icon: Icons.place,
                         label: "Places to Visit",
                         onTap: () => GoRouter.of(context)
-                            .pushReplacement(AppRouter.kPlacesView),
+                            .pushReplacement(AppRouter.kLandMarkView),
                         width: buttonWidth,
                       ),
                       ActionButton(

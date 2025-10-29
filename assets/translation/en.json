@@ -1,5 +1,17 @@
 {
-  "app_name": "Smart App",
+  "app_name": "TravelHub",
+  "Discover_Explore_Experience":"Discover. Explore. Experience.",
+  "discover_amazing_places":"Discover Amazing Places",
+  "discover_description":"Find hidden gems and popular destinations worldwide",
+   "ai_powered_recognition":"AI-Powered Recognition",
+  "ai_description":"Identify landmarks instantly with our smart camera",
+  "personalized_experience":"Personalized Experience",
+  "personalized_description":"Get recommendations tailored to your preferences",
+  "ready_to_start_your_journey?":"Ready to start your journey?",
+  "join_millions_of_travelers_exploring_the_world_with_TravelHub":"Join millions of travelers exploring the world with TravelHub.",
+  "get_started": "Get Started",
+  
+  
   "welcome": "Welcome",
   "welcome_back": "Welcome Back",
   "hello_user": "Hello, User!",

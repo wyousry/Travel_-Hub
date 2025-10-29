@@ -1,5 +1,16 @@
 {
-  "app_name": "تطبيق ذكي",
+  "app_name": "TravelHub",
+  "Discover_Explore_Experience":" اكتشف. استكشف. اختبر.",
+  "discover_amazing_places":"اكتشف أماكن مذهلة",
+  "discover_description":"اكتشف الجواهر الخفية والوجهات الشهيرة في جميع أنحاء العالم",
+  "ai_powered_recognition":"التعريف المدعوم بالذكاء الاصطناعي",
+"ai_description":"تحديد المعالم على الفور باستخدام كاميرتنا الذكية",
+"personalized_experience":"تجربة مخصصة",
+"personalized_description":"احصل على توصيات مخصصة وفقًا لتفضيلاتك",
+  "ready_to_start_your_journey?":"هل أنت مستعد لبدء رحلتك؟",
+  "join_millions_of_travelers_exploring_the_world_with_TravelHub":"انضم إلى ملايين المسافرين الذين يستكشفون العالم مع TravelHub.",
+  "get_started": "ابدأ الآن",
+ 
   "welcome": "مرحباً",
   "welcome_back": "مرحباً بعودتك",
   "hello_user": "مرحباً، المستخدم!",
