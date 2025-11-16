@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:travel_hub/constant.dart';
@@ -10,11 +11,11 @@ class SignInText extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text("Already have an account? ", style: TextStyle(color: kBlack)),
+        Text("Already have an account?".tr(), style: TextStyle(color: kBlack)),
         GestureDetector(
           onTap: () {GoRouter.of(context).pushReplacement(AppRouter.kLoginView);},
-          child: const Text(
-            "Sign In",
+          child: Text(
+            "Sign In".tr(),
             style: TextStyle(
               color: kBackgroundColor,
               fontWeight: FontWeight.bold,

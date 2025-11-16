@@ -67,11 +67,11 @@ class _BookScreenState extends State<BookScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Book Your Trip",
+              "Book Your Trip".tr(),
               style: TextStyle(color: Colors.white, fontSize: 24.sp),
             ),
             Text(
-              "Complete your reservation",
+              "Complete your reservation".tr(),
               style: TextStyle(color: Color(0xffDBEAFE), fontSize: 16.sp),
             ),
           ],
@@ -85,22 +85,22 @@ class _BookScreenState extends State<BookScreen> {
           child: ListView(
             children: [
               CustomField(
-                title: "Destination",
+                title: "Destination".tr(),
                 width: double.infinity,
                 controller: destination,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Please enter city or hotel name";
+                    return "Please enter city or hotel name".tr();
                   }
                   return null;
                 },
-                hint: "Enter city or hotel name",
+                hint: "Enter city or hotel name".tr(),
               ),
               Row(
                 children: [
                   Expanded(
                     child: CustomField(
-                      title: "Check-in",
+                      title: "Check-in".tr(),
                       width: double.infinity,
                       controller: checkIn,
                       keyboard: TextInputType.datetime,
@@ -109,17 +109,17 @@ class _BookScreenState extends State<BookScreen> {
                       },
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Please enter a check in date";
+                          return "Please enter a check in date".tr();
                         }
                         try {
                           selectedDate = DateFormat(
                             'dd/MM/yyyy',
                           ).parseStrict(value);
                           if (selectedDate.isBefore(todayDate)) {
-                            return "check in date can't be before today";
+                            return "Check in date can't be before today".tr();
                           }
                         } catch (e) {
-                          return "The date format is incorrect";
+                          return "The date format is incorrect".tr();
                         }
                         return null;
                       },
@@ -129,7 +129,7 @@ class _BookScreenState extends State<BookScreen> {
                   ),
                   Expanded(
                     child: CustomField(
-                      title: "Check-out",
+                      title: "Check-out".tr(),
                       width: double.infinity,
                       controller: checkOut,
                       keyboard: TextInputType.datetime,
@@ -138,17 +138,17 @@ class _BookScreenState extends State<BookScreen> {
                       },
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Please enter a check out date";
+                          return "Please enter a check out date".tr();
                         }
                         try {
                           selectedDate = DateFormat(
                             'dd/MM/yyyy',
                           ).parseStrict(value);
                           if (selectedDate.isBefore(todayDate)) {
-                            return "check out date can't be before today";
+                            return "Check out date can't be before today".tr();
                           }
                         } catch (e) {
-                          return "The date format is incorrect";
+                          return "The date format is incorrect".tr();
                         }
                         return null;
                       },
@@ -159,13 +159,13 @@ class _BookScreenState extends State<BookScreen> {
                 ],
               ),
               CustomField(
-                title: "Guests",
+                title: "Guests".tr(),
                 width: double.infinity,
                 controller: guests,
                 keyboard: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Please enter the number of guests";
+                    return "Please enter the number of guests".tr();
                   }
                   return null;
                 },
@@ -174,54 +174,54 @@ class _BookScreenState extends State<BookScreen> {
               ),
               Divider(color: Color(0xffF3F3F5), thickness: 2.h),
               Text(
-                "Contact Information",
+                "Contact Information".tr(),
                 style: TextStyle(color: kBlack, fontSize: 18.sp),
               ),
               SizedBox(height: 12.h),
               CustomField(
-                title: "Full Name",
+                title: "Full Name".tr(),
                 width: double.infinity,
                 controller: fullName,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Please enter your full name";
+                    return "Please enter your full name".tr();
                   }
                   return null;
                 },
-                hint: "Enter your full name",
+                hint: "Enter your full name".tr(),
               ),
               CustomField(
-                title: "Email",
+                title: "Email".tr(),
                 width: double.infinity,
                 controller: email,
                 keyboard: TextInputType.emailAddress,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Please enter your email";
+                    return "Please enter your email".tr();
                   } else if (!value.contains("@")) {
-                    return "Please enter a valid email";
+                    return "Please enter a valid email".tr();
                   }
                   return null;
                 },
-                hint: "Enter your email",
+                hint: "Enter your email".tr(),
               ),
               CustomField(
-                title: "Phone Number",
+                title: "Phone Number".tr(),
                 width: double.infinity,
                 controller: phoneNumber,
                 keyboard: TextInputType.phone,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Please enter your phone number";
+                    return "Please enter your phone number".tr();
                   } else if (!RegExp(r'^01[0-9]{9}$').hasMatch(value)) {
-                    return 'please enter a valid Egyptian phone number';
+                    return 'Please enter a valid Egyptian phone number'.tr();
                   }
                   return null;
                 },
-                hint: "Enter your phone number",
+                hint: "Enter your phone number".tr(),
               ),
               CustomButton(
-                buttonText: "Complete Booking",
+                buttonText: "Complete Booking".tr(),
                 icon: Icons.payment,
                 onPressed: () {
                   if (formKey.currentState!.validate()) {}

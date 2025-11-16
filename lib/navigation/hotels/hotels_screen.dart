@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,9 +23,10 @@ class _HotelsScreenState extends State<HotelsScreen> {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: CustomAppBar(
-        title: "Hotels",
+        
+        title: "Hotels".tr(),
         bottomWidget: Text(
-          "Find your perfect stay",
+          "Find your perfect stay".tr(),
           style: TextStyle(color: textColor?.withOpacity(0.7), fontSize: 16.sp),
         ),
         centerTitle: true,

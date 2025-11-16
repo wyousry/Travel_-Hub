@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,13 +31,12 @@ class HotelsList extends StatelessWidget {
             },
           ),
 
-          // زر "See more"
           TextButton(
             onPressed: () {
               context.read<HotelsCubit>().loadMoreHotels();
             },
             child: Text(
-              "See more",
+              "See more".tr(),
               style: TextStyle(color: Theme.of(context).colorScheme.primary),
             ),
           ),
@@ -55,42 +56,47 @@ class HotelCard extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    return Card(
-      elevation: 5,
-      color: theme.cardColor,
-      shadowColor: isDark ? Colors.white54 : Colors.black26, 
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
-      margin: EdgeInsetsDirectional.all(8.r),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _HotelImage(imageUrl: hotel.imageUrl, stars: hotel.stars.toDouble()),
-          Padding(
-            padding: EdgeInsetsDirectional.all(12.r),
-            child: Column(
-              children: [
-                _HotelInfoRow(
-                  leftText: hotel.name,
-                  rightText: "${hotel.pricePerNight} EGP",
-                  leftColor: theme.textTheme.bodyMedium?.color ?? kBlack,
-                  rightColor: theme.colorScheme.primary,
-                ),
-                SizedBox(height: 4.h),
-                _HotelInfoRow(
-                  leftText: hotel.city,
-                  rightText: "per night",
-                  leftColor: theme.textTheme.bodyMedium?.color?.withOpacity(0.7) ?? kAssets,
-                  rightColor: theme.textTheme.bodyMedium?.color?.withOpacity(0.7) ?? kAssets,
-                ),
-                SizedBox(height: 10.h),
-                CustomButton(
-                  buttonText: "Book Now",
-                  onPressed: () => GoRouter.of(context).push(AppRouter.kBookView),
-                ),
-              ],
+    return GestureDetector(
+      onTap: () {
+        GoRouter.of(context).push(AppRouter.kHotelsDetailsView, extra: hotel);
+      },
+      child: Card(
+        elevation: 5,
+        color: theme.cardColor,
+        shadowColor: isDark ? Colors.white54 : Colors.black26, 
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
+        margin: EdgeInsetsDirectional.all(8.r),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _HotelImage(imageUrl: hotel.imageUrl, stars: hotel.stars.toDouble()),
+            Padding(
+              padding: EdgeInsetsDirectional.all(12.r),
+              child: Column(
+                children: [
+                  _HotelInfoRow(
+                    leftText: hotel.name,
+                    rightText: "${hotel.pricePerNight} EGP",
+                    leftColor: theme.textTheme.bodyMedium?.color ?? kBlack,
+                    rightColor: theme.colorScheme.primary,
+                  ),
+                  SizedBox(height: 4.h),
+                  _HotelInfoRow(
+                    leftText: hotel.city,
+                    rightText: "per night".tr(),
+                    leftColor: theme.textTheme.bodyMedium?.color?.withOpacity(0.7) ?? kAssets,
+                    rightColor: theme.textTheme.bodyMedium?.color?.withOpacity(0.7) ?? kAssets,
+                  ),
+                  SizedBox(height: 10.h),
+                  CustomButton(
+                    buttonText: "Book Now".tr(),
+                    onPressed: () => GoRouter.of(context).push(AppRouter.kBookView),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -111,11 +117,13 @@ class _HotelImage extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
-          child: Image.network(
-            imageUrl,
+          child: CachedNetworkImage(
+            
             height: 180.h,
             width: double.infinity,
-            fit: BoxFit.cover,
+            fit: BoxFit.cover, imageUrl: imageUrl,
+            placeholder: (context, url) => CircularProgressIndicator(),
+        errorWidget: (context, url, error) => Icon(Icons.error),
           ),
         ),
         Container(

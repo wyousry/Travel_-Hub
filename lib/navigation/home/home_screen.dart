@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -18,7 +19,7 @@ class HomeScreen extends StatelessWidget {
       padding: const EdgeInsetsDirectional.only(top: 8),
       child: Scaffold(
         appBar:CustomAppBar(
-          title: " Welcome to Travel Hub",
+          title: " Welcome to Travel Hub".tr(),
           centerTitle: true,
           bottomWidget: const HomeHeader(),
         ),
@@ -41,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                       ActionButton(
                         color: kBackgroundColor,
                         icon: Icons.hotel,
-                        label: "Hotels",
+                        label: "Hotels".tr(),
                         onTap: () => GoRouter.of(context)
                             .pushReplacement(AppRouter.kHotelsView),
                         width: buttonWidth,
@@ -49,7 +50,7 @@ class HomeScreen extends StatelessWidget {
                       ActionButton(
                         color: kOrange,
                         icon: Icons.place,
-                        label: "Places to Visit",
+                        label: "Places to Visit".tr(),
                         onTap: () => GoRouter.of(context)
                             .pushReplacement(AppRouter.kLandMarkView),
                         width: buttonWidth,
@@ -57,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                       ActionButton(
                         color: kGreen,
                         icon: Icons.map,
-                        label: "Map",
+                        label: "Map".tr(),
                         onTap: () => GoRouter.of(context)
                             .pushReplacement(AppRouter.kMapView),
                         width: buttonWidth,
@@ -65,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                       ActionButton(
                         color: kPurple,
                         icon: Icons.camera_alt,
-                        label: "AI Camera",
+                        label: "AI Camera".tr(),
                         onTap: () => GoRouter.of(context)
                             .pushReplacement(AppRouter.kCameraView),
                         width: buttonWidth,

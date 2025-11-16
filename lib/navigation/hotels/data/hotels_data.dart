@@ -9,7 +9,8 @@ class EgHotels {
     );
     final decoded = jsonDecode(response);
     final List hotels = decoded["hotels"];
-    return hotels.map((e) => Hotels.fromJson(e)).toList();
+    final shuffled = hotels..shuffle();
+    return shuffled.map((e) => Hotels.fromJson(e)).toList();
   }
 }
 

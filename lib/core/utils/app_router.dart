@@ -1,3 +1,5 @@
+
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:travel_hub/features/ai_camera/ai_camera.dart';
@@ -79,9 +81,27 @@ abstract class AppRouter {
       ),
             GoRoute(
         path: kHotelsDetailsView,
-        builder: (context, state) {
+        pageBuilder: (context, state) {
           final hotels = state.extra as Hotels;
-          return HotelsScreenDetails(hotels);
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: HotelsScreenDetails(hotels),
+            transitionDuration: const Duration(milliseconds: 600),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+                  const begin = Offset(0.0, 1.0);
+                  const end = Offset.zero;
+                  final tween = Tween(
+                    begin: begin,
+                    end: end,
+                  ).chain(CurveTween(curve: Curves.easeInOut));
+
+                  return SlideTransition(
+                    position: animation.drive(tween),
+                    child: child,
+                  );
+                },
+          );
         },
       ),
       GoRoute(
@@ -91,13 +111,32 @@ abstract class AppRouter {
           child: const LandMarkScreen(),
         ),
       ),
-      GoRoute(
+       GoRoute(
         path: kLandMarkDetailsView,
-        builder: (context, state) {
+        pageBuilder: (context, state) {
           final landMark = state.extra as LandMark;
-          return BlocProvider(
-            create: (context) => CarouselSliderCubit(),
-            child: LandMarkDetailsScreen(landMark),
+
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: BlocProvider(
+              create: (context) => CarouselSliderCubit(),
+              child: LandMarkDetailsScreen(landMark),
+            ),
+            transitionDuration: const Duration(milliseconds: 600),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+                  const begin = Offset(0.0, 1.0);
+                  const end = Offset.zero;
+                  final tween = Tween(
+                    begin: begin,
+                    end: end,
+                  ).chain(CurveTween(curve: Curves.easeInOut));
+
+                  return SlideTransition(
+                    position: animation.drive(tween),
+                    child: child,
+                  );
+                },
           );
         },
       ),

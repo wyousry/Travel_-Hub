@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:travel_hub/constant.dart';
@@ -71,7 +72,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
             ),
             SizedBox(height: height * 0.00001),
             Text(
-              'Travel Hub',
+              'TravelHub'.tr(),
               style: TextStyle(
                 color: kWhite,
                 fontSize: width * 0.08,
@@ -80,7 +81,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
             ),
             SizedBox(height: height * 0.01),
             Text(
-              'Discover the world',
+              'Discover the world'.tr(),
               style: TextStyle(
                 color: kWhite.withOpacity(0.9),
                 fontSize: width * 0.045,

@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,7 +24,7 @@ class LandMarkDetailsScreen extends StatelessWidget {
           children: [
             SizedBox(width: 85.w),
             Text(
-              "Place Details",
+              "Place Details".tr(),
               style: TextStyle(color: kBlack, fontSize: 16.sp),
             ),
           ],
@@ -56,7 +58,9 @@ class LandMarkDetailsScreen extends StatelessWidget {
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(24.r),
-                            child: Image.network(imagePath, fit: BoxFit.cover),
+                            child: CachedNetworkImage( fit: BoxFit.cover, imageUrl: imagePath,
+                            placeholder: (context, url) => CircularProgressIndicator(),
+        errorWidget: (context, url, error) => Icon(Icons.error),),
                           ),
                         );
                       }).toList(),
@@ -117,7 +121,7 @@ class LandMarkDetailsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "About",
+                      "About".tr(),
                       style: TextStyle(color: kBlack, fontSize: 18.sp),
                     ),
                     Text(

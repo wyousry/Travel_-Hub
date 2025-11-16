@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -69,20 +70,20 @@ class _RegisterFormState extends State<RegisterForm> {
 
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Account created successfully!")),
+      SnackBar(content: Text("Account created successfully!".tr())),
     );
 
     GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
   } on FirebaseAuthException catch (e) {
     String message;
     if (e.code == 'email-already-in-use') {
-      message = 'This email is already registered.';
+      message = 'This email is already registered.'.tr();
     } else if (e.code == 'weak-password') {
-      message = 'Your password is too weak.';
+      message = 'Your password is too weak.'.tr();
     } else if (e.code == 'invalid-email') {
-      message = 'Please enter a valid email.';
+      message = 'Please enter a valid email.'.tr();
     } else {
-      message = 'Registration failed. Please try again.';
+      message = 'Registration failed. Please try again.'.tr();
     }
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
@@ -163,34 +164,34 @@ class _RegisterFormState extends State<RegisterForm> {
             children: [
               CustomTextField(
                 icon: Icons.person,
-                label: "Full Name",
+                label: "Full Name".tr(),
                 controller: name,
                 keyboard: TextInputType.name,
                 validator: (value) =>
-                    value == null || value.isEmpty ? "Please enter your name" : null,
+                    value == null || value.isEmpty ? "Please enter your full name" .tr(): null,
               ),
               SizedBox(height: height * 0.02),
               CustomTextField(
                 icon: Icons.email_outlined,
-                label: "Email Address",
+                label: "Email Address".tr(),
                 controller: email,
                 keyboard: TextInputType.emailAddress,
                 validator: (value) {
-                  if (value == null || value.isEmpty) return "Please enter your email";
-                  if (!value.contains("@")) return "Please enter a valid email";
+                  if (value == null || value.isEmpty) return "Please enter your email".tr();
+                  if (!value.contains("@")) return "Please enter a valid email".tr();
                   return null;
                 },
               ),
               SizedBox(height: height * 0.02),
               CustomTextField(
                 icon: Icons.phone_android_outlined,
-                label: "Phone",
+                label: "Phone".tr(),
                 controller: phone,
                 keyboard: TextInputType.phone,
                 validator: (value) {
-                  if (value == null || value.isEmpty) return "Please enter your phone";
+                  if (value == null || value.isEmpty) return "Please enter your phone number".tr();
                   if (!RegExp(r'^01[0-9]{9}$').hasMatch(value)) {
-                    return 'Please enter a valid Egyptian phone number';
+                    return 'Please enter a valid Egyptian phone number'.tr();
                   }
                   return null;
                 },
@@ -198,26 +199,26 @@ class _RegisterFormState extends State<RegisterForm> {
               SizedBox(height: height * 0.02),
               CustomTextField(
                 icon: Icons.lock_outline,
-                label: "Password",
+                label: "Password".tr(),
                 obscureText: true,
                 suffixIcon: Icons.visibility_off_outlined,
                 controller: password,
                 validator: (value) {
-                  if (value == null || value.isEmpty) return "Please enter your password";
-                  if (value.length < 6) return "Password must be at least 6 characters";
+                  if (value == null || value.isEmpty) return "Please enter your password".tr();
+                  if (value.length < 6) return "Password must be at least 6 characters".tr();
                   return null;
                 },
               ),
               SizedBox(height: height * 0.02),
               CustomTextField(
                 icon: Icons.lock_outline,
-                label: "Confirm Password",
+                label: "Confirm Password".tr(),
                 obscureText: true,
                 suffixIcon: Icons.visibility_off_outlined,
                 controller: confirmPassword,
                 validator: (value) {
-                  if (value == null || value.isEmpty) return "Please confirm your password";
-                  if (value != password.text) return "Passwords don’t match";
+                  if (value == null || value.isEmpty) return "Please confirm your password".tr();
+                  if (value != password.text) return "Passwords don't match".tr();
                   return null;
                 },
               ),
@@ -248,7 +249,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
                         )
                       : Text(
-                          "Create Account",
+                          "Create Account".tr(),
                           style: TextStyle(
                             fontSize: width * 0.045,
                             fontWeight: FontWeight.w600,
@@ -258,13 +259,13 @@ class _RegisterFormState extends State<RegisterForm> {
                 ),
               ),
               SizedBox(height: height * 0.02),
-              const Text("or", style: TextStyle(color: kBlack)),
+              Text("or".tr(), style: TextStyle(color: kBlack)),
               SizedBox(height: height * 0.02),
 
           
               SocialButton(
                 icon: Icons.g_mobiledata,
-                text: "Continue with Google",
+                text: "Continue with Google".tr(),
                 color: kRed,
                 onPressed: _loading ? null : () => signUp(context),
               ),
@@ -274,7 +275,7 @@ class _RegisterFormState extends State<RegisterForm> {
          
               SocialButton(
                 icon: Icons.facebook,
-                text: "Continue with Facebook",
+                text: "Continue with Facebook".tr(),
                 color: kBackgroundColor,
                 onPressed: () {
                 },

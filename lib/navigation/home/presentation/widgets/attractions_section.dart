@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travel_hub/constant.dart';
@@ -14,7 +15,7 @@ class AttractionsSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Nearby Attractions",
+              "Nearby Attractions".tr(),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16.sp,
@@ -30,7 +31,7 @@ class AttractionsSection extends StatelessWidget {
                 );
               },
               child: Text(
-                "View Full Map",
+                "View Full Map".tr(),
                 style: TextStyle(
                   color: kBackgroundColor,
                   decoration: TextDecoration.underline,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:travel_hub/constant.dart';
@@ -47,7 +48,7 @@ class RegisterHeader extends StatelessWidget {
 ,
         SizedBox(height: height * 0.03),
         Text(
-          "Join TravelHub",
+          "Join TravelHub".tr(),
           style: TextStyle(
             fontSize: width * 0.07,
             color: kWhite,
@@ -55,7 +56,7 @@ class RegisterHeader extends StatelessWidget {
           ),
         ),
         Text(
-          "Create your account to start exploring",
+          "Create your account to start exploring".tr(),
           style: TextStyle(fontSize: width * 0.04, color: Colors.white70),
         ),
       ],

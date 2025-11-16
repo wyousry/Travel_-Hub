@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_hub/constant.dart';
@@ -73,12 +74,12 @@ void initState() {
           type: BottomNavigationBarType.fixed,
           selectedFontSize: isWide ? 14 : 12,
           unselectedFontSize: isWide ? 12 : 10,
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.hotel), label: "Hotels"),
-            BottomNavigationBarItem(icon: Icon(Icons.place), label: "Places"),
-            BottomNavigationBarItem(icon: Icon(Icons.map), label: "Map"),
-            BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home".tr()),
+            BottomNavigationBarItem(icon: Icon(Icons.hotel), label: "Hotels".tr()),
+            BottomNavigationBarItem(icon: Icon(Icons.place), label: "Places".tr()),
+            BottomNavigationBarItem(icon: Icon(Icons.map), label: "Map".tr()),
+            BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings".tr()),
           ],
         ),
       ),

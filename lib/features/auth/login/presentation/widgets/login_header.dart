@@ -41,7 +41,7 @@ class LoginHeader extends StatelessWidget {
 ,
         SizedBox(height: height * 0.03),
         Text(
-          "welcome_back".tr(),
+          "Welcome Back".tr(),
           style: TextStyle(
             fontSize: width * 0.07,
             color: kWhite,
@@ -49,7 +49,7 @@ class LoginHeader extends StatelessWidget {
           ),
         ),
         Text(
-          "Sign in to continue your journey",
+          "Sign in to continue your journey".tr(),
           style: TextStyle(fontSize: width * 0.04, color: Colors.white70),
         ),
       ],

@@ -63,7 +63,7 @@ class TravelWelcomeScreen extends StatelessWidget {
                 ),
                 SizedBox(height: height * 0.03),
                 Text(
-                  'app_name'.tr(),
+                  'TravelHub'.tr(),
                   style: TextStyle(
                     color: kWhite,
                     fontSize: width * 0.07,
@@ -72,7 +72,7 @@ class TravelWelcomeScreen extends StatelessWidget {
                 ),
                 SizedBox(height: height * 0.01),
                 Text(
-                  'Discover_Explore_Experience'.tr(),
+                  'Discover. Explore. Experience.'.tr(),
                   style: TextStyle(
                     color: kWhite,
                     fontSize: width * 0.04,
@@ -81,27 +81,27 @@ class TravelWelcomeScreen extends StatelessWidget {
                 SizedBox(height: height * 0.045),
                  FeatureItem(
                   icon: Icons.location_on,
-                  title: 'discover_amazing_places'.tr(),
+                  title: 'Discover Amazing Places'.tr(),
                   description:
-                      'discover_description'.tr(),
+                      'Find hidden gems and popular destinations worldwide'.tr(),
                 ),
                 SizedBox(height: height * 0.025),
                  FeatureItem(
                   icon: Icons.camera_alt,
-                  title: 'ai_powered_recognition'.tr(),
+                  title: 'AI-Powered Recognition'.tr(),
                   description:
-                      'ai_description'.tr(),
+                      'Identify landmarks instantly with our smart camera'.tr(),
                 ),
                 SizedBox(height: height * 0.025),
                  FeatureItem(
                   icon: Icons.person,
-                  title: 'personalized_experience'.tr(),
+                  title: 'Personalized Experience'.tr(),
                   description:
-                      'personalized_description'.tr(),
+                      'Get recommendations tailored to your preferences'.tr(),
                 ),
                 const Spacer(),
                 Text(
-                  'ready_to_start_your_journey?'.tr(),
+                  'Ready to start your journey?'.tr(),
                   style: TextStyle(
                     color: kWhite,
                     fontSize: width * 0.04,
@@ -109,7 +109,7 @@ class TravelWelcomeScreen extends StatelessWidget {
                 ),
                 SizedBox(height: height * 0.006),
                 Text(
-                  'join_millions_of_travelers_exploring_the_world_with_TravelHub'.tr(),
+                  'Join millions of travelers exploring the world with TravelHub'.tr(),
                   style: TextStyle(
                     color: kWhite,
                     fontSize: width * 0.035,
@@ -132,7 +132,7 @@ class TravelWelcomeScreen extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    "get_started".tr(),
+                    "Get Started".tr(),
                     style: TextStyle(
                       fontSize: width * 0.045,
                       fontWeight: FontWeight.w600,

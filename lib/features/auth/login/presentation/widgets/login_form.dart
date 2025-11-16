@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -60,14 +61,14 @@ class LoginForm extends StatelessWidget {
           children: [
             CustomTextField(
               icon: Icons.email_outlined,
-              label: "Email Address",
+              label: "Email Address".tr(),
               controller: email,
               keyboard: TextInputType.emailAddress,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return "Please enter your email";
+                  return "Please enter your email".tr();
                 } else if (!value.contains("@")) {
-                  return "Please enter a valid email";
+                  return "Please enter a valid email".tr();
                 }
                 return null;
               },
@@ -75,16 +76,16 @@ class LoginForm extends StatelessWidget {
             SizedBox(height: height * 0.02),
             CustomTextField(
               icon: Icons.lock_outline,
-              label: "Password",
+              label: "Password".tr(),
               obscureText: true,
               suffixIcon: Icons.visibility_off_outlined,
               controller: password,
               keyboard: TextInputType.visiblePassword,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return "Please enter your password";
+                  return "Please enter your password".tr();
                 } else if (value.length < 5) {
-                  return "Please enter a strong password";
+                  return "Please enter a strong password".tr();
                 } else {
                   return null;
                 }
@@ -94,8 +95,8 @@ class LoginForm extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {},
-                child: const Text(
-                  "Forgot Password?",
+                child: Text(
+                  "Forgot Password?".tr(),
                   style: TextStyle(color: kBackgroundColor),
                 ),
               ),
@@ -116,7 +117,7 @@ class LoginForm extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  "Sign In",
+                  "Sign In".tr(),
                   style: TextStyle(
                     fontSize: width * 0.045,
                     fontWeight: FontWeight.w600,
@@ -126,17 +127,17 @@ class LoginForm extends StatelessWidget {
               ),
             ),
             SizedBox(height: height * 0.02),
-            const Text("or", style: TextStyle(color: kBlack)),
+            Text("or".tr(), style: TextStyle(color: kBlack)),
             SizedBox(height: height * 0.02),
-            const SocialButton(
+            SocialButton(
               icon: Icons.g_mobiledata,
-              text: "Continue with Google",
+              text: "Continue with Google".tr(),
               color: kRed,
             ),
             SizedBox(height: height * 0.015),
-            const SocialButton(
+            SocialButton(
               icon: Icons.facebook,
-              text: "Continue with Facebook",
+              text: "Continue with Facebook".tr(),
               color: kBackgroundColor,
             ),
             SizedBox(height: height * 0.015),

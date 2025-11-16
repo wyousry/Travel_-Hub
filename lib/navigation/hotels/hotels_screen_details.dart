@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -18,7 +20,7 @@ class HotelsScreenDetails extends StatelessWidget {
           children: [
             SizedBox(width: 85.w),
             Text(
-              "Hotel Details",
+              "Hotel Details".tr(),
               style: TextStyle(color: kBlack, fontSize: 16.sp),
             ),
           ],
@@ -35,7 +37,9 @@ class HotelsScreenDetails extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(24.r),
-                child: Image.network(hotels.imageUrl, fit: BoxFit.cover),
+                child: CachedNetworkImage( fit: BoxFit.cover, imageUrl: hotels.imageUrl,
+                 placeholder: (context, url) => CircularProgressIndicator(),
+        errorWidget: (context, url, error) => Icon(Icons.error),),
               ),
             ),
             Padding(
@@ -54,8 +58,8 @@ class HotelsScreenDetails extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: Align(
-                          alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.only(start: 122.r),
                           child: Text(
                             "${hotels.reviewsCount}",
                             style: TextStyle(color: kAssets, fontSize: 16.sp),
@@ -67,8 +71,8 @@ class HotelsScreenDetails extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                        child: Align(
-                          alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.only(end: 122.r),
                           child: Text(
                             hotels.city,
                             style: TextStyle(color: kAssets, fontSize: 14.sp),
@@ -76,10 +80,10 @@ class HotelsScreenDetails extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: Align(
-                          alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.only(start: 122.r),
                           child: Text(
-                            "reviews",
+                            "reviews".tr(),
                             style: TextStyle(color: kAssets, fontSize: 14.sp),
                           ),
                         ),
@@ -110,7 +114,7 @@ class HotelsScreenDetails extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "About",
+                      "About".tr(),
                       style: TextStyle(color: kBlack, fontSize: 18.sp),
                     ),
                     Text(
@@ -132,7 +136,7 @@ class HotelsScreenDetails extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Facilities",
+                      "Features".tr(),
                       style: TextStyle(color: kBlack, fontSize: 18.sp),
                     ),
                     ...List.generate(hotels.facilities.length, (index) {
@@ -165,7 +169,7 @@ class HotelsScreenDetails extends StatelessWidget {
                         Expanded(
                           child: Center(
                             child: Text(
-                              "Price per night",
+                              "Price per night".tr(),
                               style: TextStyle(color: kWhite, fontSize: 14.sp),
                             ),
                           ),
@@ -181,7 +185,7 @@ class HotelsScreenDetails extends StatelessWidget {
                       ],
                     ),
                     CustomButton(
-                      buttonText: "Book Now",
+                      buttonText: "Book Now".tr(),
                       buttonColor: kWhite,
                       textColor: kBackgroundColor,
                       onPressed: () {
