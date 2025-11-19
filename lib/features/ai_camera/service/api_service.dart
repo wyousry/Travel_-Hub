@@ -13,7 +13,7 @@ class ApiService {
       );
 
       request.files.add(
-        await http.MultipartFile.fromPath('file', imageFile.path),
+        await http.MultipartFile.fromPath('image', imageFile.path), // اسم المتغير الصحيح
       );
 
       final streamed = await request.send();
@@ -21,12 +21,7 @@ class ApiService {
 
       final decodedResponse = jsonDecode(response);
 
-      if (streamed.statusCode == 200) {
-
-        return decodedResponse; 
-      } else {
-        return decodedResponse;
-      }
+      return decodedResponse;
     } catch (e) {
       return {"error": e.toString()};
     }

@@ -16,6 +16,7 @@ const kLightBlue = Colors.lightBlue;
 const kOrange = Colors.orange;
 const kGreen = Colors.green;
 const kPurple = Colors.purple;
+const kLightGrey = Color(0xfff3f4f6);
 const linearGradient = LinearGradient(
   colors: [Color(0xFF007BFF), Color(0xFFFF6600)],
   begin: Alignment.topLeft,

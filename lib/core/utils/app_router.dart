@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -59,8 +61,13 @@ abstract class AppRouter {
 
       //Home Feature
       GoRoute(path: kHomeView, builder: (context, state) => const HomeScreen()),
-      GoRoute(path: kCameraView, builder: (context, state) => const AiCamera()),
-
+    GoRoute(
+        path: kCameraView,
+        builder: (context, state) {
+          final imageFile = state.extra as File; 
+          return AiCamera(selectedImage: imageFile);
+        },
+      ),
       //Navigation Feature
       GoRoute(
         path: kNavigationView,
