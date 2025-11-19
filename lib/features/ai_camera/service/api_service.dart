@@ -13,7 +13,7 @@ class ApiService {
       );
 
       request.files.add(
-        await http.MultipartFile.fromPath('image', imageFile.path), // اسم المتغير الصحيح
+        await http.MultipartFile.fromPath('image', imageFile.path),
       );
 
       final streamed = await request.send();
