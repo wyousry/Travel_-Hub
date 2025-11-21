@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travel_hub/constant.dart';
-import 'package:travel_hub/navigation/maps/full_map_screen.dart';
+import 'package:travel_hub/navigation/maps/presentation/views/full_map_screen.dart';
 
 class AttractionsSection extends StatelessWidget {
   const AttractionsSection({super.key});

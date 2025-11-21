@@ -21,7 +21,7 @@ import 'package:travel_hub/features/splash/splash_screen.dart';
 import 'package:travel_hub/navigation/hotels/hotels_screen_details.dart';
 import 'package:travel_hub/navigation/hotels/models/hotels_model.dart';
 import 'package:travel_hub/navigation/main_screen.dart';
-import 'package:travel_hub/navigation/maps/full_map_screen.dart';
+import 'package:travel_hub/navigation/maps/presentation/views/full_map_screen.dart';
 
 
 abstract class AppRouter {

@@ -150,8 +150,8 @@ class _AiWikiPageState extends State<AiCamera> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: ElevatedButton.icon(
-                  onPressed: (_summaryAr != null && _summaryAr!.isNotEmpty)
-                      ? () => TtsService.speak(_summaryAr!)
+                  onPressed: (_summaryEn != null && _summaryEn!.isNotEmpty)
+                      ? () => TtsService.speak(_summaryEn!)
                       : null,
                   icon: const Icon(Icons.play_arrow),
                   label: Text('Play Audio'.tr()),
@@ -200,7 +200,7 @@ class _AiWikiPageState extends State<AiCamera> {
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: OutlinedButton.icon(
                   onPressed: () {
-                    _showError("قريباً: وظيفة الحفظ");
+             
                   },
                   icon: const Icon(Icons.save),
                   label: Text('Save'.tr()),
