@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "872937595912-bbct2annhcrqa8a1tgsujtkhf9or00om.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.travel_hub",
+            "certificate_hash": "ff3c86c3434a6be2194badc1775d7527a9e3efe6"
+          }
+        },
+        {
           "client_id": "872937595912-sbafkn4tlj07rv1cs94ug47p0tmoufaf.apps.googleusercontent.com",
           "client_type": 3
         }

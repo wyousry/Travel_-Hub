@@ -8,9 +8,9 @@ class SocialButton extends StatelessWidget {
   final Color color;
   final VoidCallback? onPressed;
 
-  const SocialButton({
+  const SocialButton( {
     super.key,
-    required this.icon,
+     required this.icon,
     required this.text,
     required this.color, 
     this.onPressed,

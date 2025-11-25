@@ -67,6 +67,7 @@ class _SettingsHeaderState extends State<SettingsHeader> {
                   userEmail ?? '',
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7),
+                    fontSize: 14.sp,
                   ),
                 ),
               ],

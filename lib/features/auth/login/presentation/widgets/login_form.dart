@@ -5,12 +5,24 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_hub/constant.dart';
 import 'package:travel_hub/core/services/auth_services.dart';
 import 'package:travel_hub/core/utils/app_router.dart';
+import 'package:travel_hub/features/auth/login/presentation/widgets/custom_password_field.dart';
+import 'package:travel_hub/features/auth/login/services/login_with_google.dart';
 import 'custom_text_field.dart';
 import 'social_button.dart';
 import 'sign_up_text.dart';
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
+
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  final TextEditingController email = TextEditingController();
+  final TextEditingController password = TextEditingController();
+  final key = GlobalKey<FormState>();
+  bool isPasswordVisible = false;
 
   Future<void> signIn(
     BuildContext context,
@@ -42,10 +54,6 @@ class LoginForm extends StatelessWidget {
     final height = size.height;
     final width = size.width;
 
-    final TextEditingController email = TextEditingController();
-    final TextEditingController password = TextEditingController();
-    final key = GlobalKey<FormState>();
-
     return Container(
       padding: EdgeInsetsDirectional.symmetric(
         horizontal: width * 0.07,
@@ -65,30 +73,36 @@ class LoginForm extends StatelessWidget {
               controller: email,
               keyboard: TextInputType.emailAddress,
               validator: (value) {
-                if (value == null || value.isEmpty) {
+                if (value == null || value.isEmpty)
                   return "Please enter your email".tr();
-                } else if (!value.contains("@")) {
+                if (!value.contains("@"))
                   return "Please enter a valid email".tr();
-                }
                 return null;
               },
             ),
             SizedBox(height: height * 0.02),
-            CustomTextField(
+            CustomPasswordField(
               icon: Icons.lock_outline,
               label: "Password".tr(),
-              obscureText: true,
-              suffixIcon: Icons.visibility_off_outlined,
+              obscureText: !isPasswordVisible,
+              isPasswordVisible: isPasswordVisible,
+              suffixIcon: IconButton(
+                onPressed: () {
+                  isPasswordVisible = !isPasswordVisible;
+                  setState(() {});
+                },
+                icon: Icon(
+                  isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                ),
+              ),
               controller: password,
               keyboard: TextInputType.visiblePassword,
               validator: (value) {
-                if (value == null || value.isEmpty) {
+                if (value == null || value.isEmpty)
                   return "Please enter your password".tr();
-                } else if (value.length < 5) {
+                if (value.length < 5)
                   return "Please enter a strong password".tr();
-                } else {
-                  return null;
-                }
+                return null;
               },
             ),
             Align(
@@ -133,12 +147,14 @@ class LoginForm extends StatelessWidget {
               icon: Icons.g_mobiledata,
               text: "Continue with Google".tr(),
               color: kRed,
-            ),
-            SizedBox(height: height * 0.015),
-            SocialButton(
-              icon: Icons.facebook,
-              text: "Continue with Facebook".tr(),
-              color: kBackgroundColor,
+              onPressed: () async {
+                final user = await GoogleSignInService().signInWithGoogle();
+                if (user != null) {
+                  print('login successful  : ${user.displayName}');
+                } else {
+                  print('Google Sign-In failed');
+                }
+              },
             ),
             SizedBox(height: height * 0.015),
             const SignUpText(),
