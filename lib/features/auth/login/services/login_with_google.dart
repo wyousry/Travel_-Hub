@@ -1,38 +1,48 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class GoogleSignInService {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: ['email'],
-  );
+final FirebaseAuth _auth = FirebaseAuth.instance;
+final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  Future<User?> signInWithGoogle() async {
-    try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+Future<User?> signInWithGoogle() async {
+  try {
+    final googleUser = await _googleSignIn.signIn();
+    if (googleUser == null) return null;
 
-      if (googleUser == null) return null;
+    final googleAuth = await googleUser.authentication;
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
 
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
+    final userCredential = await _auth.signInWithCredential(credential);
+   if (userCredential.user == null) {
+  debugPrint("User is NULL — Google Sign-in failed internally");
+  return null;
+}
 
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
+final user = userCredential.user;
 
-      final userCredential =
-          await _auth.signInWithCredential(credential);
+    if (user != null) {
+      final userRef = FirebaseFirestore.instance.collection('users').doc(user.uid);
+      final userDoc = await userRef.get();
 
-      return userCredential.user;
-    } catch (e) {
-      print('Google Sign-In Error: $e');
-      return null;
+      if (!userDoc.exists) {
+        await userRef.set({
+          'uid': user.uid,
+          'name': user.displayName ?? '',
+          'email': user.email ?? '',
+          'photo': user.photoURL ?? '',
+        });
+      }
+
+      return user;
     }
-  }
-
-  Future<void> signOut() async {
-    await _googleSignIn.signOut();
-    await _auth.signOut();
+    return null;
+  } catch (e) {
+    debugPrint("Google Sign-In Error: $e");
+    return null;
   }
 }

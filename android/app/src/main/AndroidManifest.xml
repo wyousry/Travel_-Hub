@@ -11,12 +11,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyByiiqB29SKv4AdC3roVo2jRUJ9cr61A5U" />
-            <queries>
-    <intent>
-        <action android:name="android.intent.action.VIEW" />
-        <data android:scheme="https" />
-    </intent>
-</queries>
 
         <activity
             android:name=".MainActivity"

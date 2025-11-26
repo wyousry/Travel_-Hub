@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_hub/constant.dart';
@@ -8,7 +10,6 @@ import 'package:travel_hub/core/utils/app_router.dart';
 import 'package:travel_hub/features/auth/login/presentation/widgets/custom_password_field.dart';
 import 'package:travel_hub/features/auth/login/services/login_with_google.dart';
 import 'custom_text_field.dart';
-import 'social_button.dart';
 import 'sign_up_text.dart';
 
 class LoginForm extends StatefulWidget {
@@ -23,6 +24,7 @@ class _LoginFormState extends State<LoginForm> {
   final TextEditingController password = TextEditingController();
   final key = GlobalKey<FormState>();
   bool isPasswordVisible = false;
+  bool isLoading = false;
 
   Future<void> signIn(
     BuildContext context,
@@ -73,10 +75,12 @@ class _LoginFormState extends State<LoginForm> {
               controller: email,
               keyboard: TextInputType.emailAddress,
               validator: (value) {
-                if (value == null || value.isEmpty)
+                if (value == null || value.isEmpty) {
                   return "Please enter your email".tr();
-                if (!value.contains("@"))
+                }
+                if (!value.contains("@")) {
                   return "Please enter a valid email".tr();
+                }
                 return null;
               },
             ),
@@ -98,10 +102,12 @@ class _LoginFormState extends State<LoginForm> {
               controller: password,
               keyboard: TextInputType.visiblePassword,
               validator: (value) {
-                if (value == null || value.isEmpty)
+                if (value == null || value.isEmpty) {
                   return "Please enter your password".tr();
-                if (value.length < 5)
+                }
+                if (value.length < 5) {
                   return "Please enter a strong password".tr();
+                }
                 return null;
               },
             ),
@@ -143,19 +149,37 @@ class _LoginFormState extends State<LoginForm> {
             SizedBox(height: height * 0.02),
             Text("or".tr(), style: TextStyle(color: kBlack)),
             SizedBox(height: height * 0.02),
-            SocialButton(
-              icon: Icons.g_mobiledata,
-              text: "Continue with Google".tr(),
-              color: kRed,
-              onPressed: () async {
-                final user = await GoogleSignInService().signInWithGoogle();
-                if (user != null) {
-                  print('login successful  : ${user.displayName}');
-                } else {
-                  print('Google Sign-In failed');
-                }
-              },
-            ),
+             SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: SignInButton(
+                    Buttons.Google,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(width * 0.03),
+                    ),
+                   onPressed: () async {
+  setState(() => isLoading = true);
+
+  final user = await signInWithGoogle();
+
+  if (mounted) setState(() => isLoading = false);
+
+  if (user != null) {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('userEmail', user.email ?? '');
+    await prefs.setString('userName', user.displayName ?? 'User');
+    await prefs.setString('profileImage', user.photoURL ?? '');
+
+    GoRouter.of(context).pushReplacement(AppRouter.kNavigationView);
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Google sign-in failed")),
+    );
+  }
+},
+
+                  ),
+                ),
             SizedBox(height: height * 0.015),
             const SignUpText(),
           ],

@@ -2,14 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_hub/constant.dart';
 import 'package:travel_hub/core/utils/app_router.dart';
+import 'package:travel_hub/features/auth/login/services/login_with_google.dart';
 
 import '../../login/presentation/widgets/custom_text_field.dart';
 import '../../login/presentation/widgets/sign_in_text.dart';
-import '../../login/presentation/widgets/social_button.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});
@@ -26,7 +29,7 @@ class _RegisterFormState extends State<RegisterForm> {
   final TextEditingController confirmPassword = TextEditingController();
   final GlobalKey<FormState> key = GlobalKey<FormState>();
 
-  bool _loading = false;
+  bool loading = false;
 
   @override
   void dispose() {
@@ -40,108 +43,67 @@ class _RegisterFormState extends State<RegisterForm> {
 
   Future<void> _setLoading(bool v) async {
     if (!mounted) return;
-    setState(() => _loading = v);
+    setState(() => loading = v);
   }
 
- Future<void> signUp(BuildContext context) async {
-  if (_loading) return;
-  await _setLoading(true);
-
-  try {
-
-    final cred = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: email.text.trim(),
-      password: password.text.trim(),
-    );
-
-   
-    await FirebaseFirestore.instance.collection('users').doc(cred.user!.uid).set({
-      'name': name.text.trim(),
-      'email': email.text.trim(),
-      'phone': phone.text.trim(),
-      'createdAt': FieldValue.serverTimestamp(),
-    });
-
-    if (name.text.trim().isNotEmpty) {
-      await cred.user?.updateDisplayName(name.text.trim());
-      await cred.user?.reload();
-
-    }
-
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Account created successfully!".tr())),
-    );
-
-    GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
-  } on FirebaseAuthException catch (e) {
-    String message;
-    if (e.code == 'email-already-in-use') {
-      message = 'This email is already registered.'.tr();
-    } else if (e.code == 'weak-password') {
-      message = 'Your password is too weak.'.tr();
-    } else if (e.code == 'invalid-email') {
-      message = 'Please enter a valid email.'.tr();
-    } else {
-      message = 'Registration failed. Please try again.'.tr();
-    }
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
-    }
-  } catch (e) {
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $e')));
-    }
-  } finally {
-    await _setLoading(false);
-  }
-}
-
-  /*Future<void> signInWithGoogle(BuildContext context) async {
-    if (_loading) return;
+  Future<void> signUp(BuildContext context) async {
+    if (loading) return;
     await _setLoading(true);
 
     try {
-      if (kIsWeb) {
-        final provider = GoogleAuthProvider();
-        final userCredential = await FirebaseAuth.instance.signInWithPopup(provider);
-    
-        } else {
-        final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-        if (googleUser == null) {
-       
-          await _setLoading(false);
-          return;
-        }
+      final cred = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email.text.trim(),
+        password: password.text.trim(),
+      );
 
-        final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(cred.user!.uid)
+          .set({
+            'name': name.text.trim(),
+            'email': email.text.trim(),
+            'phone': phone.text.trim(),
+            'createdAt': FieldValue.serverTimestamp(),
+          });
 
-        final credential = GoogleAuthProvider.credential(
-          accessToken: googleAuth.accessToken,
-          idToken: googleAuth.idToken,
-        );
-
-        await FirebaseAuth.instance.signInWithCredential(credential);
+      if (name.text.trim().isNotEmpty) {
+        await cred.user?.updateDisplayName(name.text.trim());
+        await cred.user?.reload();
       }
 
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Signed in with Google successfully!")),
+        SnackBar(content: Text("Account created successfully!".tr())),
       );
-      GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
+
+      GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
     } on FirebaseAuthException catch (e) {
+      String message;
+      if (e.code == 'email-already-in-use') {
+        message = 'This email is already registered.'.tr();
+      } else if (e.code == 'weak-password') {
+        message = 'Your password is too weak.'.tr();
+      } else if (e.code == 'invalid-email') {
+        message = 'Please enter a valid email.'.tr();
+      } else {
+        message = 'Registration failed. Please try again.'.tr();
+      }
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('FirebaseAuth: ${e.message}')));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(message)));
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Google Sign-In failed: $e')));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Error: $e')));
       }
     } finally {
       await _setLoading(false);
     }
   }
-*/
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -167,8 +129,9 @@ class _RegisterFormState extends State<RegisterForm> {
                 label: "Full Name".tr(),
                 controller: name,
                 keyboard: TextInputType.name,
-                validator: (value) =>
-                    value == null || value.isEmpty ? "Please enter your full name" .tr(): null,
+                validator: (value) => value == null || value.isEmpty
+                    ? "Please enter your full name".tr()
+                    : null,
               ),
               SizedBox(height: height * 0.02),
               CustomTextField(
@@ -177,8 +140,12 @@ class _RegisterFormState extends State<RegisterForm> {
                 controller: email,
                 keyboard: TextInputType.emailAddress,
                 validator: (value) {
-                  if (value == null || value.isEmpty) return "Please enter your email".tr();
-                  if (!value.contains("@")) return "Please enter a valid email".tr();
+                  if (value == null || value.isEmpty) {
+                    return "Please enter your email".tr();
+                  }
+                  if (!value.contains("@")) {
+                    return "Please enter a valid email".tr();
+                  }
                   return null;
                 },
               ),
@@ -189,7 +156,9 @@ class _RegisterFormState extends State<RegisterForm> {
                 controller: phone,
                 keyboard: TextInputType.phone,
                 validator: (value) {
-                  if (value == null || value.isEmpty) return "Please enter your phone number".tr();
+                  if (value == null || value.isEmpty) {
+                    return "Please enter your phone number".tr();
+                  }
                   if (!RegExp(r'^01[0-9]{9}$').hasMatch(value)) {
                     return 'Please enter a valid Egyptian phone number'.tr();
                   }
@@ -204,8 +173,12 @@ class _RegisterFormState extends State<RegisterForm> {
                 suffixIcon: Icons.visibility_off_outlined,
                 controller: password,
                 validator: (value) {
-                  if (value == null || value.isEmpty) return "Please enter your password".tr();
-                  if (value.length < 6) return "Password must be at least 6 characters".tr();
+                  if (value == null || value.isEmpty) {
+                    return "Please enter your password".tr();
+                  }
+                  if (value.length < 6) {
+                    return "Password must be at least 6 characters".tr();
+                  }
                   return null;
                 },
               ),
@@ -217,19 +190,22 @@ class _RegisterFormState extends State<RegisterForm> {
                 suffixIcon: Icons.visibility_off_outlined,
                 controller: confirmPassword,
                 validator: (value) {
-                  if (value == null || value.isEmpty) return "Please confirm your password".tr();
-                  if (value != password.text) return "Passwords don't match".tr();
+                  if (value == null || value.isEmpty) {
+                    return "Please confirm your password".tr();
+                  }
+                  if (value != password.text) {
+                    return "Passwords don't match".tr();
+                  }
                   return null;
                 },
               ),
               SizedBox(height: height * 0.05),
 
-      
               SizedBox(
                 width: double.infinity,
                 height: height * 0.065,
                 child: ElevatedButton(
-                  onPressed: _loading
+                  onPressed: loading
                       ? null
                       : () {
                           if (key.currentState!.validate()) {
@@ -242,11 +218,14 @@ class _RegisterFormState extends State<RegisterForm> {
                       borderRadius: BorderRadius.circular(width * 0.03),
                     ),
                   ),
-                  child: _loading
+                  child: loading
                       ? const SizedBox(
                           height: 20,
                           width: 20,
-                          child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: Colors.white,
+                          ),
                         )
                       : Text(
                           "Create Account".tr(),
@@ -262,25 +241,46 @@ class _RegisterFormState extends State<RegisterForm> {
               Text("or".tr(), style: TextStyle(color: kBlack)),
               SizedBox(height: height * 0.02),
 
-          
-              SocialButton(
-                icon: Icons.g_mobiledata,
-                text: "Continue with Google".tr(),
-                color: kRed,
-                onPressed: _loading ? null : () => signUp(context),
-              ),
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: SignInButton(
+                  Buttons.Google,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(width * 0.03),
+                  ),
+                  onPressed: () async {
+                    setState(() => loading = true);
 
+                    final user = await signInWithGoogle();
+
+                    if (mounted) setState(() => loading = false);
+
+                    if (user != null) {
+                      final prefs = await SharedPreferences.getInstance();
+                      await prefs.setString('userEmail', user.email ?? '');
+                      await prefs.setString(
+                        'userName',
+                        user.displayName ?? 'User',
+                      );
+                      await prefs.setString(
+                        'profileImage',
+                        user.photoURL ?? '',
+                      );
+
+                      GoRouter.of(
+                        context,
+                      ).pushReplacement(AppRouter.kNavigationView);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Google sign-in failed")),
+                      );
+                    }
+                  },
+                ),
+              ),
               SizedBox(height: height * 0.015),
 
-         
-              SocialButton(
-                icon: Icons.facebook,
-                text: "Continue with Facebook".tr(),
-                color: kBackgroundColor,
-                onPressed: () {
-                },
-              ),
-              SizedBox(height: height * 0.015),
               const SignInText(),
             ],
           ),

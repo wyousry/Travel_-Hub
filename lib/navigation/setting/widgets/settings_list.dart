@@ -14,12 +14,10 @@ class SettingsList extends StatelessWidget {
       children: [
         _buildSectionTitle(tr('account'), color: Colors.blueAccent),
         _buildSettingItem(Icons.lock_outline, tr('privacy')),
-        _buildSettingItem(Icons.notifications_none, tr('notifications')),
         _buildLanguageItem(context),
          SizedBox(height: 15.h),
         _buildSectionTitle(tr('support'), color: Colors.blueAccent),
         _buildSettingItem(Icons.help_outline, tr('help')),
-        _buildSettingItem(Icons.feedback_outlined, tr('feedback')),
          SizedBox(height: 15.h),
         _buildSectionTitle(tr('more'), color: Colors.blueAccent),
         _buildSettingItem(Icons.info_outline, tr('about')),
