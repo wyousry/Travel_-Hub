@@ -77,10 +77,10 @@
   "Tourist Spots": "Tourist Spots",
   "Your Location": "Your Location",
   "Edit Profile": "Edit Profile",
-  "Dark Mode": "Dark Mode",
-  "Light Mode": "Light Mode",
-  "Language": "Language",
-  "logout": "logout",
+  "dark_mode": "Dark Mode",
+  "light_mode": "Light Mode",
+  "language": "Language",
+  "logout": "Logout",
   "AI Analysis": "AI Analysis",
   "Play Audio": "Play Audio",
   "Share": "Share",
@@ -121,6 +121,21 @@
   "Share":"Share",
   "Play Audio": "Play Audio",
   "Save": "Save",
-  "Retake": "Retake"
+  "Retake": "Retake",
+  "confirm_logout": "Are you sure you want to logout?",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "choose_language": "Choose Language",
+  "english": "English",
+  "arabic": "Arabic",
+  "account": "Account",
+  "privacy": "Privacy",
+  "support": "Support",
+  "help": "Help",
+  "more": "More",
+  "about_us": "About Us"
+
+  
+
 }
 

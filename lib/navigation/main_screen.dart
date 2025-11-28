@@ -45,7 +45,7 @@ void initState() {
     const FullMapScreen(),
     SettingScreen(
       isDarkMode: _isDarkMode,
-      onToggleTheme: _toggleTheme,
+       onToggleTheme: (_) => _toggleTheme(),
     ),
   ];
 }

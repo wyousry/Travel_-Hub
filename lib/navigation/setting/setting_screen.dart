@@ -4,7 +4,7 @@ import 'package:travel_hub/navigation/setting/widgets/settings_list.dart';
 
 class SettingScreen extends StatelessWidget {
   final bool isDarkMode;
-  final VoidCallback onToggleTheme;
+  final ValueChanged onToggleTheme;
 
   const SettingScreen({
     super.key,

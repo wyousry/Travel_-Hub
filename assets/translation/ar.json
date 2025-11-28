@@ -77,9 +77,9 @@
   "Tourist Spots": "أماكن سياحية",
   "Your Location": "موقعك الحالي",
   "Edit Profile": "تعديل الملف الشخصي",
-  "Dark Mode": "الوضع الداكن",
-  "Light Mode": "الوضع الفاتح",
-  "Language": "اللغة",
+  "dark_mode": "الوضع الداكن",
+  "light_mode": "الوضع الفاتح",
+  "language": "اللغة",
   "logout": "تسجيل الخروج",
   "AI Analysis": "تحليل الذكاء الاصطناعي",
   "Play Audio": "تشغيل الصوت",
@@ -121,6 +121,18 @@
   "Share":"مشاركة",
   "Play Audio": "تشغيل الصوت",
   "Save": "حفظ",
-  "Retake": "إعادة الالتقاط"
+  "Retake": "إعادة الالتقاط",
+  "confirm_logout": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+  "cancel": "إلغاء",
+  "confirm": "تأكيد",
+  "choose_language": "اختر اللغة",
+  "english": "English",
+  "arabic": "العربية",
+  "account": "الحساب",
+  "privacy": "الخصوصية",
+  "support": "الدعم",
+  "help": "المساعدة",
+  "more": "المزيد",
+  "about_us": " من نحن"
 
 }

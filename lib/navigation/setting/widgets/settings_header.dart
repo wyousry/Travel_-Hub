@@ -1,5 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:typed_data';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -7,11 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:travel_hub/core/utils/assets.dart';
+import 'package:travel_hub/constant.dart';
 
 class SettingsHeader extends StatefulWidget {
   final bool isDarkMode;
-  final VoidCallback onToggleTheme;
+  final ValueChanged onToggleTheme;
 
   const SettingsHeader({
     super.key,
@@ -28,11 +29,32 @@ class _SettingsHeaderState extends State<SettingsHeader> {
   String? userEmail;
   File? localImage;
   String? savedImageUrl;
+  Uint8List? savedMemoryImage;
 
   @override
   void initState() {
     super.initState();
     _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final user = FirebaseAuth.instance.currentUser;
+
+    setState(() {
+      userName = prefs.getString('userName') ?? 'User Name';
+      userEmail = prefs.getString('userEmail') ?? 'user@email.com';
+    });
+    if (user != null && user.email != null) {
+      final base64Image = prefs.getString('profile_image_base64_${user.email}');
+      if (base64Image != null) {
+        savedMemoryImage = base64Decode(base64Image);
+      } else {
+        savedMemoryImage = null;
+        localImage = null;
+        savedImageUrl = user.photoURL;
+      }
+    }
   }
 
   Future<void> pickAndUploadImage() async {
@@ -70,32 +92,37 @@ class _SettingsHeaderState extends State<SettingsHeader> {
 
       if (pickedFile == null) return;
 
+      final bytes = await pickedFile.readAsBytes();
+      final base64Image = base64Encode(bytes);
+
       setState(() {
         localImage = File(pickedFile.path);
+        savedMemoryImage = bytes;
       });
-
-      final user = FirebaseAuth.instance.currentUser;
-
-      if (user == null) return;
-
-      final storageRef = FirebaseStorage.instance
-          .ref()
-          .child("profile_images")
-          .child("${user.uid}.jpg");
-
-      await storageRef.putFile(localImage!);
-
-      final downloadURL = await storageRef.getDownloadURL();
-
-      await user.updatePhotoURL(downloadURL);
-      await user.reload();
 
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString("profileImage", downloadURL);
+      final user = FirebaseAuth.instance.currentUser;
 
-      setState(() {
-        savedImageUrl = downloadURL;
-      });
+      if (user != null && user.email != null) {
+        await prefs.setString(
+          'profile_image_base64_${user.email}',
+          base64Image,
+        );
+        final storageRef = FirebaseStorage.instance
+            .ref()
+            .child("profile_images")
+            .child("${user.uid}.jpg");
+
+        await storageRef.putFile(localImage!);
+        final downloadURL = await storageRef.getDownloadURL();
+
+        await user.updatePhotoURL(downloadURL);
+        await user.reload();
+
+        setState(() {
+          savedImageUrl = downloadURL;
+        });
+      }
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -103,20 +130,11 @@ class _SettingsHeaderState extends State<SettingsHeader> {
         ),
       );
     } catch (e) {
-      print("Error: $e");
+      debugPrint("Error: $e");
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text("Error: $e")));
     }
-  }
-
-  Future<void> _loadUserData() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      userName = prefs.getString('userName') ?? 'User Name';
-      userEmail = prefs.getString('userEmail') ?? 'user@email.com';
-      savedImageUrl = prefs.getString("profileImage");
-    });
   }
 
   @override
@@ -134,14 +152,18 @@ class _SettingsHeaderState extends State<SettingsHeader> {
             children: [
               CircleAvatar(
                 radius: 35.r,
-                backgroundColor: Colors.grey.shade300,
-                backgroundImage: localImage != null
+                backgroundColor: kGrey.shade300,
+                backgroundImage: savedMemoryImage != null
+                    ? MemoryImage(savedMemoryImage!)
+                    : localImage != null
                     ? FileImage(localImage!)
                     : savedImageUrl != null
                     ? NetworkImage(savedImageUrl!)
                     : null,
-
-                child: (localImage == null && savedImageUrl == null)
+                child:
+                    (localImage == null &&
+                        savedMemoryImage == null &&
+                        savedImageUrl == null)
                     ? Icon(Icons.person, size: 35.r)
                     : null,
               ),
@@ -151,14 +173,10 @@ class _SettingsHeaderState extends State<SettingsHeader> {
                   width: 25.w,
                   height: 25.h,
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: kBackgroundColor,
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(
-                    Icons.camera_alt,
-                    color: Colors.white,
-                    size: 18.r,
-                  ),
+                  child: Icon(Icons.camera_alt, color: kWhite, size: 18.r),
                 ),
               ),
             ],
@@ -180,13 +198,14 @@ class _SettingsHeaderState extends State<SettingsHeader> {
                   userEmail ?? '',
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7),
+                    fontSize: 12.sp,
                   ),
                 ),
               ],
             ),
           ),
           InkWell(
-            onTap: widget.onToggleTheme,
+            onTap: () {widget.onToggleTheme;},
             borderRadius: BorderRadius.circular(12.r),
             child: Container(
               padding: EdgeInsetsDirectional.symmetric(
@@ -194,7 +213,7 @@ class _SettingsHeaderState extends State<SettingsHeader> {
                 vertical: 8.h,
               ),
               decoration: BoxDecoration(
-                color: isDark ? Colors.grey[800] : Colors.grey[200],
+                color: isDark ? kGrey[800] : kGrey[200],
                 borderRadius: BorderRadius.circular(12.r),
               ),
               child: Row(
