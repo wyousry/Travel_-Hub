@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:image_picker/image_picker.dart'; // نحتاج لاستيراد ImagePicker
+import 'package:image_picker/image_picker.dart';
 import 'package:travel_hub/constant.dart';
 import 'package:travel_hub/core/custom_app_bar.dart';
 import 'package:travel_hub/core/utils/app_router.dart';
@@ -13,14 +13,15 @@ import 'package:travel_hub/navigation/home/presentation/widgets/home_header.dart
 import 'package:travel_hub/navigation/home/presentation/widgets/search_field.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final void Function(int)? onTabSelected;
+  const HomeScreen({super.key, this.onTabSelected});
 
   Future<void> _handleCameraTap(BuildContext context) async {
     final ImagePicker picker = ImagePicker();
 
     final source = await showModalBottomSheet<ImageSource>(
       context: context,
-      builder: (BuildContext sheetContext) {
+      builder: (sheetContext) {
         return SafeArea(
           child: Wrap(
             children: [
@@ -41,16 +42,15 @@ class HomeScreen extends StatelessWidget {
     );
 
     if (source != null) {
-      final XFile? pickedFile = await picker.pickImage(source: source, imageQuality: 80);
+      final XFile? pickedFile = await picker.pickImage(
+        source: source,
+        imageQuality: 80,
+      );
 
       if (pickedFile != null) {
         final selectedImage = File(pickedFile.path);
 
- 
-        GoRouter.of(context).push(
-          AppRouter.kCameraView,
-          extra: selectedImage,
-        );
+        GoRouter.of(context).push(AppRouter.kCameraView, extra: selectedImage);
       }
     }
   }
@@ -65,7 +65,6 @@ class HomeScreen extends StatelessWidget {
           centerTitle: true,
           bottomWidget: const HomeHeader(),
         ),
-
         body: SingleChildScrollView(
           padding: EdgeInsetsDirectional.symmetric(horizontal: 20.w),
           child: Column(
@@ -73,7 +72,6 @@ class HomeScreen extends StatelessWidget {
             children: [
               const SearchField(),
               SizedBox(height: 20.h),
-
               LayoutBuilder(
                 builder: (context, constraints) {
                   final buttonWidth = (constraints.maxWidth - 16.w) / 2;
@@ -85,38 +83,46 @@ class HomeScreen extends StatelessWidget {
                         color: kBackgroundColor,
                         icon: Icons.hotel,
                         label: "Hotels".tr(),
-                        onTap: () => GoRouter.of(context)
-                            .push(AppRouter.kHotelsView),
+                        onTap: () {
+                          if (onTabSelected != null) {
+                            onTabSelected!(1);
+                          }
+                        },
                         width: buttonWidth,
                       ),
                       ActionButton(
                         color: kOrange,
                         icon: Icons.place,
                         label: "Places to Visit".tr(),
-                        onTap: () => GoRouter.of(context)
-                            .push(AppRouter.kLandMarkView),
+                        onTap: () {
+                          if (onTabSelected != null) {
+                            onTabSelected!(2);
+                          }
+                        },
                         width: buttonWidth,
                       ),
                       ActionButton(
                         color: kGreen,
                         icon: Icons.map,
                         label: "Map".tr(),
-                        onTap: () => GoRouter.of(context)
-                            .push(AppRouter.kMapView),
+                        onTap: () {
+                          if (onTabSelected != null) {
+                            onTabSelected!(3);
+                          }
+                        },
                         width: buttonWidth,
                       ),
                       ActionButton(
                         color: kPurple,
                         icon: Icons.camera_alt,
                         label: "AI Camera".tr(),
-                        onTap: () => _handleCameraTap(context), 
+                        onTap: () => _handleCameraTap(context),
                         width: buttonWidth,
                       ),
                     ],
                   );
                 },
               ),
-
               SizedBox(height: 24.h),
               const AttractionsSection(),
             ],

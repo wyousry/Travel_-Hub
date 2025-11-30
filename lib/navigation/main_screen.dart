@@ -33,7 +33,9 @@ class _MainScreenState extends State<MainScreen> {
 void initState() {
   super.initState();
   _pages = [
-    const HomeScreen(),
+    HomeScreen(onTabSelected: (index) {
+      setState(() => _selectedIndex = index);
+    },),
     BlocProvider(
       create: (context) => HotelsCubit()..loadHotels(),
       child: const HotelsScreen(),
@@ -45,7 +47,7 @@ void initState() {
     const FullMapScreen(),
     SettingScreen(
       isDarkMode: _isDarkMode,
-       onToggleTheme: (_) => _toggleTheme(),
+       onToggleTheme: _toggleTheme,
     ),
   ];
 }

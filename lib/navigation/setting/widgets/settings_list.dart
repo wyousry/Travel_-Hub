@@ -48,7 +48,6 @@ class SettingsList extends StatelessWidget {
       ),
     );
   }
-
   Widget _buildSettingItem(
     IconData icon,
     String title, {

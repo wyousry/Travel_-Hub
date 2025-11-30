@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:travel_hub/constant.dart';
 
 class ActionButton extends StatelessWidget {
   final Color color;
@@ -40,12 +41,12 @@ class ActionButton extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: Colors.white, size: height * 0.4),
+            Icon(icon, color: kWhite, size: height * 0.4),
             SizedBox(height: 8.h),
             Text(
               label,
               style: TextStyle(
-                color: Colors.white,
+                color: kWhite,
                 fontSize: height * 0.18,
                 fontWeight: FontWeight.w500,
               ),

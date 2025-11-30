@@ -12,7 +12,7 @@ import 'package:travel_hub/constant.dart';
 
 class SettingsHeader extends StatefulWidget {
   final bool isDarkMode;
-  final ValueChanged onToggleTheme;
+  final VoidCallback onToggleTheme;
 
   const SettingsHeader({
     super.key,
@@ -205,7 +205,7 @@ class _SettingsHeaderState extends State<SettingsHeader> {
             ),
           ),
           InkWell(
-            onTap: () {widget.onToggleTheme;},
+            onTap: widget.onToggleTheme,
             borderRadius: BorderRadius.circular(12.r),
             child: Container(
               padding: EdgeInsetsDirectional.symmetric(
