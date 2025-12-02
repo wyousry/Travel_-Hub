@@ -33,7 +33,8 @@ class Hotel {
 class HotelService {
   static Future<List<Hotel>> loadHotelsFromAsset() async {
     final String jsonString = await rootBundle.loadString('assets/data/egypt_hotels_clean_descriptions.json');
-    final List<dynamic> data = json.decode(jsonString);
+    final Map<String, dynamic> jsonData = json.decode(jsonString);
+    final List<dynamic> data = jsonData['hotels'];
     return data.map((e) => Hotel.fromJson(e)).toList();
   }
 }

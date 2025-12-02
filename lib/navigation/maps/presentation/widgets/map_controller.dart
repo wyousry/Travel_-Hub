@@ -51,11 +51,10 @@ class FullMapController {
           position: LatLng(hotel.latitude, hotel.longitude),
           icon: icon,
           infoWindow: InfoWindow(
+            
             title: hotel.name,
             snippet: "Rating: ${hotel.rating}",
             onTap: () {
-              // ممكن تفتح رابط الحجز لو تحبي
-              // مثلاً: launch(hotel.bookingUrl) لو مستخدمة url_launcher
             },
           ),
         ),
