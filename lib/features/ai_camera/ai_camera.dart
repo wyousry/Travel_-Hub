@@ -172,7 +172,8 @@ class _AiWikiPageState extends State<AiCamera> {
                 child: ElevatedButton.icon(
                   onPressed: () {
                    
-                    _showError("قريباً: وظيفة المشاركة");
+                    _showError(" Soon ");
+                  
                   },
                   icon: const Icon(Icons.share),
                   label: Text('Share'.tr()),
