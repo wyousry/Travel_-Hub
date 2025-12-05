@@ -6,10 +6,10 @@ import 'package:travel_hub/navigation/land_mark/models/land_mark_model.dart';
 
 class LandMarkCubit extends Cubit<LandMarkState> {
   LandMarkCubit() : super(LandMarkInitial());
-  Future<void> loadLandMark() async {
+  Future<void> loadLandMark(String lang) async {
     try {
       emit(LandMarkLoading());
-      final List<LandMark> landMark = await EgLandMark.getLandMark();
+      final List<LandMark> landMark = await EgLandMark.getLandMark(lang);
       emit(LandMarkSuccess(landMark, numMarks: 10));
     } catch (e) {
       emit(LandMarkError(e.toString()));

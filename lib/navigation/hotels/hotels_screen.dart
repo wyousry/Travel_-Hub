@@ -15,6 +15,19 @@ class HotelsScreen extends StatefulWidget {
 }
 
 class _HotelsScreenState extends State<HotelsScreen> {
+  bool _isLoaded = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (!_isLoaded) {
+      final lang = context.locale.languageCode;
+      context.read<HotelsCubit>().loadHotels(lang);
+      _isLoaded = true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -23,7 +36,6 @@ class _HotelsScreenState extends State<HotelsScreen> {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: CustomAppBar(
-        
         title: "Hotels".tr(),
         bottomWidget: Text(
           "Find your perfect stay".tr(),

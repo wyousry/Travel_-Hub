@@ -29,28 +29,17 @@ class _MainScreenState extends State<MainScreen> {
 
   late final List<Widget> _pages;
 
- @override
-void initState() {
-  super.initState();
-  _pages = [
-    HomeScreen(onTabSelected: (index) {
-      setState(() => _selectedIndex = index);
-    },),
-    BlocProvider(
-      create: (context) => HotelsCubit()..loadHotels(),
-      child: const HotelsScreen(),
-    ),
-     BlocProvider(
-      create: (context) => LandMarkCubit()..loadLandMark(),
-      child: const LandMarkScreen(),
-    ),
-    const FullMapScreen(),
-    SettingScreen(
-      isDarkMode: _isDarkMode,
-       onToggleTheme: _toggleTheme,
-    ),
-  ];
-}
+  @override
+  void initState() {
+    super.initState();
+    _pages = [
+      const HomeScreen(),
+      const HotelsScreen(),
+      const LandMarkScreen(),
+      const FullMapScreen(),
+      SettingScreen(isDarkMode: _isDarkMode, onToggleTheme: _toggleTheme),
+    ];
+  }
 
   void _onItemTapped(int index) {
     setState(() => _selectedIndex = index);
@@ -78,10 +67,19 @@ void initState() {
           unselectedFontSize: isWide ? 12 : 10,
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home".tr()),
-            BottomNavigationBarItem(icon: Icon(Icons.hotel), label: "Hotels".tr()),
-            BottomNavigationBarItem(icon: Icon(Icons.place), label: "Places".tr()),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.hotel),
+              label: "Hotels".tr(),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.place),
+              label: "Places".tr(),
+            ),
             BottomNavigationBarItem(icon: Icon(Icons.map), label: "Map".tr()),
-            BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings".tr()),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: "Settings".tr(),
+            ),
           ],
         ),
       ),

@@ -3,9 +3,9 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:travel_hub/navigation/hotels/models/hotels_model.dart';
 
 class EgHotels {
-  static Future<List<Hotels>> getEgHotels() async {
+  static Future<List<Hotels>> getEgHotels(String lang) async {
     final response = await rootBundle.loadString(
-      "assets/data/egypt_hotels_clean_descriptions.json",
+      "assets/data/egypt_hotels_$lang.json",
     );
     final decoded = jsonDecode(response);
     final List hotels = decoded["hotels"];

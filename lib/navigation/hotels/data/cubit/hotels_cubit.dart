@@ -5,10 +5,10 @@ import 'package:travel_hub/navigation/hotels/data/hotels_data.dart';
 class HotelsCubit extends Cubit<HotelsState> {
   HotelsCubit() : super(HotelsInitial());
 
-  Future<void> loadHotels() async {
+  Future<void> loadHotels(String lang) async {
     try {
       emit(HotelsLoading());
-      final hotels = await EgHotels.getEgHotels();
+      final hotels = await EgHotels.getEgHotels(lang);
       emit(HotelsSuccess(hotels,numHotels: 10));
     } catch (e) {
       emit(HotelsError(e.toString()));
