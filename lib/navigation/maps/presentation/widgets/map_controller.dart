@@ -41,7 +41,7 @@ class FullMapController {
 
     for (var hotel in hotels) {
       final BitmapDescriptor icon = await BitmapDescriptor.fromAssetImage(
-        const ImageConfiguration(size: Size(48, 48)),
+        const ImageConfiguration(size: Size(5, 5)),
         AssetsData.hotelLogo,
       );
 

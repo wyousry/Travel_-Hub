@@ -54,6 +54,14 @@ dependencies:
   geocoding: ^4.0.0
   geolocator: ^14.0.2
   firebase_storage: ^12.4.10
+  cloud_functions: ^5.6.2
+  flutter_svg: ^2.2.3
+  uni_links:
+    git:
+      url: https://github.com/avioli/uni_links.git
+      path: uni_links
+      ref: f9de4a02ff096090c96e71baac3fe1a73209e6c3
+
 
   
 dev_dependencies:
@@ -83,6 +91,7 @@ flutter:
      - assets/images/
      - assets/translation/
      - assets/data/
+     - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

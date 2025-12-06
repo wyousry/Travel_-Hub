@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:travel_hub/features/ai_camera/ai_camera.dart';
+import 'package:travel_hub/features/auth/forget_password/forget.dart';
 import 'package:travel_hub/features/auth/login/presentation/views/login_screen.dart';
 import 'package:travel_hub/features/auth/register/view/register_screen.dart';
+import 'package:travel_hub/features/auth/reset/reset_passworf.dart';
 import 'package:travel_hub/features/welcome/welcome_screen.dart';
 import 'package:travel_hub/navigation/land_mark/data/carousel_slider_cubit/carousel_slider_cubit.dart';
 import 'package:travel_hub/navigation/land_mark/land_mark_details_screen.dart';
@@ -23,6 +25,8 @@ abstract class AppRouter {
   static const kWelcomeView = '/welcomeView';
   static const kLoginView = '/loginView';
   static const kRegisterView = '/registerView';
+  static const kForgetView = '/forgetView';
+  static const kReset = '/restView';
 
   //Navigation Feature
   static const kNavigationView = '/navigation';
@@ -53,6 +57,14 @@ abstract class AppRouter {
       GoRoute(
         path: kRegisterView,
         builder: (context, state) => const RegisterScreen(),
+      ),
+      GoRoute(
+        path: kForgetView,
+        builder: (context, state) => const ForgotPasswordScreen(),
+      ),
+      GoRoute(
+        path: kReset,
+        builder: (context, state) => const ResetScreen(oobCode: '',),
       ),
 
       //Home Feature

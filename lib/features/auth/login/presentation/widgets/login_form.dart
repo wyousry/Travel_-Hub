@@ -115,10 +115,14 @@ class _LoginFormState extends State<LoginForm> {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {},
+                child: InkWell(onTap: () {
+                  GoRouter.of(context).pushReplacement(AppRouter.kForgetView);
+                },
                 child: Text(
                   "Forgot Password?".tr(),
                   style: TextStyle(color: kBackgroundColor),
                 ),
+              ),
               ),
             ),
             SizedBox(

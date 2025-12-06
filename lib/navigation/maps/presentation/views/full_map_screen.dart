@@ -81,6 +81,7 @@ class _FullMapScreenState extends State<FullMapScreen> {
               onPressed: () => mapController.goToMyLocation(() => setState(() {})),
               heroTag: "locationBtn",
               backgroundColor: linearGradient .colors.first,
+              foregroundColor: kWhite,
               child: const Icon(Icons.my_location),
             ),
           ),

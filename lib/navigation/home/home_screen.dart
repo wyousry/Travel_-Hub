@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsetsDirectional.only(top: 8),
+      padding: const EdgeInsetsDirectional.only(top: 15),
       child: Scaffold(
         appBar:  AppBar(
           title: Row(
