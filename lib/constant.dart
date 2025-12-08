@@ -32,4 +32,9 @@ const LinearGradient loginGradient = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
 );
+const LinearGradient buttonGradient = LinearGradient(
+  colors: <Color>[Color(0xFF4C8DFF), Color(0xFFD76EFF)],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
 

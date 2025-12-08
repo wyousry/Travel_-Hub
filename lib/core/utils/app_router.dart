@@ -1,9 +1,11 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:travel_hub/features/ai_camera/ai_camera.dart';
 import 'package:travel_hub/features/auth/forget_password/forget.dart';
+import 'package:travel_hub/features/auth/forget_password/success.dart';
 import 'package:travel_hub/features/auth/login/presentation/views/login_screen.dart';
 import 'package:travel_hub/features/auth/register/view/register_screen.dart';
 import 'package:travel_hub/features/auth/reset/reset_passworf.dart';
@@ -27,6 +29,7 @@ abstract class AppRouter {
   static const kRegisterView = '/registerView';
   static const kForgetView = '/forgetView';
   static const kReset = '/restView';
+  static const kSuccess = '/success';
 
   //Navigation Feature
   static const kNavigationView = '/navigation';
@@ -44,6 +47,22 @@ abstract class AppRouter {
   static const kLandMarkDetailsView = '/marksDetails';
 
   static final routers = GoRouter(
+    redirect: (context, state) {
+      final user = FirebaseAuth.instance.currentUser;
+      final loc = state.matchedLocation;
+      final isAuthRoute = loc == kLoginView || loc == kRegisterView || loc == kForgetView || loc == kWelcomeView;
+      final isResetRoute = loc == kReset || loc.startsWith('/__/auth/action');
+
+      if (loc == '/') return null;
+
+      if (user == null) {
+        if (isAuthRoute || isResetRoute) return null;
+        return kLoginView;
+      } else {
+        if (isAuthRoute) return kNavigationView;
+        return null;
+      }
+    },
     routes: [
       GoRoute(path: '/', builder: (context, state) => const SplashScreen()),
       GoRoute(
@@ -65,6 +84,29 @@ abstract class AppRouter {
       GoRoute(
         path: kReset,
         builder: (context, state) => const ResetScreen(oobCode: '',),
+      ),
+       GoRoute(
+        path: kSuccess,
+        builder: (context, state) => const successScreen(),
+      ),
+
+      GoRoute(
+        path: '/__/auth/action',
+        builder: (context, state) {
+          final uri = state.uri;
+          final mode = uri.queryParameters['mode'];
+          final oobCode = uri.queryParameters['oobCode'];
+
+          if (mode == 'resetPassword' && oobCode != null) {
+            return ResetScreen(oobCode: oobCode);
+          }
+
+          return const Scaffold(
+            body: Center(
+              child: Text('Invalid or unsupported link'),
+            ),
+          );
+        },
       ),
 
       //Home Feature

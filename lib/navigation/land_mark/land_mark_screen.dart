@@ -32,10 +32,12 @@ class _LandMarkScreenState extends State<LandMarkScreen> {
 
   @override
   Widget build(BuildContext context) {
+        final theme = Theme.of(context);
+    final textColor = theme.textTheme.bodyMedium?.color;
     return Scaffold(
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: kWhite,
         title: Align(
           alignment: Alignment.center,
           child: Column(
@@ -43,17 +45,16 @@ class _LandMarkScreenState extends State<LandMarkScreen> {
             children: [
               Text(
                 "Places to Visit".tr(),
-                style: TextStyle(color: kBlack, fontSize: 24.sp),
+                style: TextStyle(color: textColor, fontSize: 24.sp),
               ),
               Text(
                 "Discover amazing destinations".tr(),
-                style: TextStyle(color: kAssets, fontSize: 16.sp),
+                style: TextStyle(color: textColor?.withOpacity(0.7), fontSize: 16.sp),
               ),
             ],
           ),
         ),
       ),
-      backgroundColor: kWhite,
       body: Padding(
         padding: EdgeInsets.all(16.r),
         child: BlocBuilder<LandMarkCubit, LandMarkState>(

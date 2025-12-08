@@ -1,17 +1,62 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:travel_hub/core/custom_app_bar.dart';
+import 'package:travel_hub/core/utils/app_router.dart';
 import 'package:travel_hub/navigation/land_mark/data/carousel_slider_cubit/carousel_slider_cubit.dart';
 import 'package:travel_hub/navigation/land_mark/models/land_mark_model.dart';
+import 'package:travel_hub/navigation/land_mark/widgets/ai_photo_card.dart';
 
 class LandMarkDetailsScreen extends StatelessWidget {
   final LandMark landMark;
   LandMarkDetailsScreen(this.landMark, {super.key});
   final CarouselSliderController controller = CarouselSliderController();
+    Future<void> _handleCameraTap(BuildContext context) async {
+    final ImagePicker picker = ImagePicker();
+
+    final source = await showModalBottomSheet<ImageSource>(
+      context: context,
+      builder: (sheetContext) {
+        return SafeArea(
+          child: Wrap(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.camera_alt),
+                title: Text('Camera'.tr()),
+                onTap: () => Navigator.pop(sheetContext, ImageSource.camera),
+              ),
+              ListTile(
+                leading: const Icon(Icons.photo),
+                title: Text('Gallery'.tr()),
+                onTap: () => Navigator.pop(sheetContext, ImageSource.gallery),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+
+    if (source != null) {
+      final XFile? pickedFile = await picker.pickImage(
+        source: source,
+        imageQuality: 80,
+      );
+
+      if (pickedFile != null) {
+        final selectedImage = File(pickedFile.path);
+
+        GoRouter.of(context).push(AppRouter.kCameraView, extra: selectedImage);
+      }
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +64,7 @@ class LandMarkDetailsScreen extends StatelessWidget {
       builder: (context) {
         final theme = Theme.of(context);
         final isDark = theme.brightness == Brightness.dark;
-          final textColor = theme.textTheme.bodyMedium?.color;
+        final textColor = theme.textTheme.bodyMedium?.color;
         final List<String> images = [
           landMark.mainImage,
           ...landMark.galleryImages,
@@ -31,7 +76,7 @@ class LandMarkDetailsScreen extends StatelessWidget {
             bottomWidget: Text(
               "Discover amazing destinations".tr(),
               style: TextStyle(
-              color: textColor?.withOpacity(0.7),
+                color: textColor?.withOpacity(0.7),
                 fontSize: 16.sp,
               ),
             ),
@@ -115,7 +160,9 @@ class LandMarkDetailsScreen extends StatelessWidget {
                       Text(
                         landMark.name,
                         style: TextStyle(
-                           color: theme.textTheme.bodyMedium?.color?.withOpacity(0.9),  
+                          color: theme.textTheme.bodyMedium?.color?.withOpacity(
+                            0.9,
+                          ),
                           fontSize: 16.sp,
                           fontWeight: FontWeight.bold,
                         ),
@@ -159,6 +206,10 @@ class LandMarkDetailsScreen extends StatelessWidget {
                             color: theme.textTheme.bodyMedium?.color,
                             fontSize: 16.sp,
                           ),
+                        ),
+
+                        AiPhotoCard(
+                          onPressed: () => _handleCameraTap(context),
                         ),
                       ],
                     ),
