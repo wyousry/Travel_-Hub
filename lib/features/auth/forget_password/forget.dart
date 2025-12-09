@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:travel_hub/constant.dart';
 import 'package:travel_hub/core/utils/app_router.dart';
@@ -23,7 +24,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   }
 
   Future<void> _resetPassword() async {
-    //GoRouter.of(context).go(AppRouter.kVerifyOtpView);
     final email = _emailController.text.trim();
 
     if (email.isEmpty) {
@@ -37,7 +37,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-      _showMessage("Password reset link has been sent to your email");
+      GoRouter.of(context).go(AppRouter.kSuccess);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         _showMessage("This email doesn't exist");
@@ -78,18 +78,18 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       },
                       icon: const Icon(Icons.arrow_back),
                     ),
-                    const Expanded(
+                     Expanded(
                       child: Center(
                         child: Text(
                           'Forgot your password ?',
                           style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 22.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(width: 48),
+                     SizedBox(width: 48.w),
                   ],
                 ),
                 const SizedBox(height: 60),
@@ -110,59 +110,59 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 80),
-                const Center(
+                 SizedBox(height: 80.h),
+                 Center(
                   child: Text(
                     'Enter your email address',
-                    style: TextStyle(fontSize: 24, color: kWhite),
+                    style: TextStyle(fontSize: 24.sp, color: kWhite),
                   ),
                 ),
-                const SizedBox(height: 20),
+                 SizedBox(height: 20.h),
                 TextField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     hintText: 'Enter Your Email',
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 14,
+                    contentPadding:  EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 14.h,
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(8.r),
                       borderSide: const BorderSide(color: kWhite),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: const BorderSide(
+                      borderRadius: BorderRadius.circular(8.r),
+                      borderSide:  BorderSide(
                         color: kWhite,
-                        width: 1.2,
+                        width: 1.2.w,
                       ),
                     ),
                     filled: true,
                     fillColor: kWhite,
                   ),
                 ),
-                const SizedBox(height: 20),
+                 SizedBox(height: 20.h),
                 SizedBox(
                   width: double.infinity,
-                  height: 48,
+                  height: 48.h,
                   child: ElevatedButton(
                     onPressed: _loading ? null : _resetPassword,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: kPriceColor,
                       foregroundColor: kWhite,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(8.r),
                       ),
                       elevation: 0,
                     ),
                     child: _loading
                         ? const CircularProgressIndicator(color: kWhite)
-                        : const Text(
+                        :  Text(
                             'Reset Password',
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
-                              fontSize: 16,
+                              fontSize: 16.sp,
                             ),
                           ),
                   ),
