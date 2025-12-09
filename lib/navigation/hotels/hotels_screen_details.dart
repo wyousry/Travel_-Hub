@@ -143,9 +143,12 @@ class HotelsScreenDetails extends StatelessWidget {
                       return Row(
                         children: [
                           Icon(Icons.check, color: KCheck),
-                          Text(
-                            " ${hotels.facilities[index]}",
-                            style: TextStyle(color: kAssets, fontSize: 16.sp),
+                          Expanded(
+                            child: Text(
+                              " ${hotels.facilities[index]}",
+                              style: TextStyle(color: kAssets, fontSize: 16.sp),
+                               softWrap: true,
+                            ),
                           ),
                         ],
                       );

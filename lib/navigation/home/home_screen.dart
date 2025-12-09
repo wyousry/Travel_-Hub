@@ -122,8 +122,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ? Icon(Icons.person, size: 35.r)
                     : null,
               ),
-              SizedBox(width: 50.w,),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "Welcome ${userName??""}",
