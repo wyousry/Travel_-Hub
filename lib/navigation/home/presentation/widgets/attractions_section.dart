@@ -61,7 +61,7 @@ class _AttractionsSectionState extends State<AttractionsSection> {
                 );
               },
               child: Text(
-                "View Full Map",
+                "View Full Map".tr(),
                 style: TextStyle(
                   color: kBackgroundColor,
                   decoration: TextDecoration.underline,

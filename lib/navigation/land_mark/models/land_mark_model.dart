@@ -27,4 +27,14 @@ class LandMark {
           : [],
     );
   }
+   Map<String, dynamic> toJson() {
+    return {
+      "name": name,
+      "location": location,
+      "shortInfo": shortInfo,
+      "detailedInfo": detailedInfo,
+      "mainImage": mainImage,
+      "galleryImages": galleryImages,
+    };
+  }
 }

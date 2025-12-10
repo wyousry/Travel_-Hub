@@ -56,4 +56,21 @@ class Hotels {
       facilities: List<String>.from(json['facilities'] ?? []),
     );
   }
+   Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'city': city,
+      'booking_url': bookingUrl,
+      'image_url': imageUrl,
+      'rating': rating,
+      'description': description,
+      'reviews_count': reviewsCount,
+      'stars': stars,
+      'last_updated': lastUpdated,
+      'price_per_night': pricePerNight,
+      'latitude': latitude,
+      'longitude': longitude,
+      'facilities': facilities,
+    };
+  }
 }

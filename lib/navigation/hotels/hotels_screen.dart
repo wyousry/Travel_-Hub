@@ -2,7 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:travel_hub/constant.dart';
 import 'package:travel_hub/core/custom_app_bar.dart';
+import 'package:travel_hub/core/utils/app_router.dart';
 import 'package:travel_hub/navigation/hotels/data/cubit/hotels_cubit.dart';
 import 'package:travel_hub/navigation/hotels/data/cubit/hotels_state.dart';
 import 'package:travel_hub/navigation/hotels/presentation/widgets/hotel_list.dart';
@@ -35,13 +38,34 @@ class _HotelsScreenState extends State<HotelsScreen> {
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
-      appBar: CustomAppBar(
-        title: "Hotels".tr(),
-        bottomWidget: Text(
-          "Find your perfect stay".tr(),
-          style: TextStyle(color: textColor?.withOpacity(0.7), fontSize: 16.sp),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: theme.scaffoldBackgroundColor,
+        title: Align(
+          alignment: Alignment.center,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "Hotels".tr(),
+                style: TextStyle(color: kBlack, fontSize: 24.sp),
+              ),
+              Text(
+                "Find your perfect stay".tr(),
+                style: TextStyle(color: kAssets, fontSize: 16.sp),
+              ),
+            ],
+          ),
         ),
-        centerTitle: true,
+        actions: [
+          Column(
+            children: [
+              IconButton(icon: const Icon(Icons.favorite), onPressed: () {
+                GoRouter.of(context).push(AppRouter.kHotelsFavoritesView);
+              }),
+            ],
+          ),
+        ],
       ),
       body: Padding(
         padding: EdgeInsetsDirectional.all(16.r),

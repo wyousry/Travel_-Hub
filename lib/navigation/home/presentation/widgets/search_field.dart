@@ -46,7 +46,7 @@ class _SearchFieldState extends State<SearchField> {
           }
         },
         decoration: InputDecoration(
-          hintText: "Search destinations, hotels...",
+          hintText: "Search destinations, hotels...".tr(),
           prefixIcon: const Icon(Icons.search),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12.r),

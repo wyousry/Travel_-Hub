@@ -72,7 +72,7 @@ class HotelsScreenDetails extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsetsDirectional.only(end: 122.r),
+                          padding: EdgeInsetsDirectional.only(end: 100.r),
                           child: Text(
                             hotels.city,
                             style: TextStyle(color: kAssets, fontSize: 14.sp),
@@ -81,7 +81,7 @@ class HotelsScreenDetails extends StatelessWidget {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsetsDirectional.only(start: 122.r),
+                          padding: EdgeInsetsDirectional.only(start: 100.r),
                           child: Text(
                             "reviews".tr(),
                             style: TextStyle(color: kAssets, fontSize: 14.sp),

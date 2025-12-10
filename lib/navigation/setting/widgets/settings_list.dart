@@ -9,6 +9,7 @@ import 'package:travel_hub/constant.dart';
 import 'package:travel_hub/core/utils/app_router.dart';
 import 'package:travel_hub/navigation/hotels/data/cubit/hotels_cubit.dart';
 import 'package:travel_hub/navigation/land_mark/data/cubit/land_mark_cubit.dart';
+import 'package:travel_hub/navigation/setting/views/about_screen.dart';
 
 class SettingsList extends StatelessWidget {
   const SettingsList({super.key});
@@ -31,7 +32,16 @@ class SettingsList extends StatelessWidget {
         SizedBox(height: 15.h),
 
         _buildSectionTitle(tr('more'), color: Colors.blueAccent),
-        _buildSettingItem(Icons.info_outline, tr('about_us')),
+        _buildSettingItem(
+          Icons.info_outline,
+          tr('about_us'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const AboutScreen()),
+            );
+          },
+        ),
 
         _buildLogoutItem(context),
       ],
@@ -51,6 +61,7 @@ class SettingsList extends StatelessWidget {
       ),
     );
   }
+
   Widget _buildSettingItem(
     IconData icon,
     String title, {
@@ -129,7 +140,7 @@ class SettingsList extends StatelessWidget {
     return InkWell(
       onTap: () {
         context.setLocale(locale);
-           context.read<HotelsCubit>().loadHotels(locale.languageCode);
+        context.read<HotelsCubit>().loadHotels(locale.languageCode);
         context.read<LandMarkCubit>().loadLandMark(locale.languageCode);
         Navigator.pop(context);
       },
@@ -178,16 +189,16 @@ class SettingsList extends StatelessWidget {
         final confirm = await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text(tr('logout'),style: TextStyle(fontWeight: FontWeight.bold),),
-            content: Text(tr('confirm_logout'),style: TextStyle(fontSize: 14),),
+            title: Text(tr('logout'), style: const TextStyle(fontWeight: FontWeight.bold)),
+            content: Text(tr('confirm_logout'), style: const TextStyle(fontSize: 14)),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context, false),
-                child: Text(tr('cancel'), style: TextStyle()),
+                child: Text(tr('cancel')),
               ),
               TextButton(
                 onPressed: () => Navigator.pop(context, true),
-                child: Text(tr('confirm'), style: TextStyle(color: kRed)),
+                child: Text(tr('confirm'), style: const TextStyle(color: kRed)),
               ),
             ],
           ),

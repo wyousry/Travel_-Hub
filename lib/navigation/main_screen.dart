@@ -8,7 +8,7 @@ import 'package:travel_hub/navigation/hotels/hotels_screen.dart';
 import 'package:travel_hub/navigation/land_mark/data/cubit/land_mark_cubit.dart';
 import 'package:travel_hub/navigation/land_mark/land_mark_screen.dart';
 import 'package:travel_hub/navigation/maps/presentation/views/full_map_screen.dart';
-import 'package:travel_hub/navigation/setting/setting_screen.dart';
+import 'package:travel_hub/navigation/setting/views/setting_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

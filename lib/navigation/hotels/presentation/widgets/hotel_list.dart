@@ -6,6 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:travel_hub/core/utils/app_router.dart';
 import 'package:travel_hub/constant.dart';
+import 'package:travel_hub/navigation/favorites/hotels_favorites/data/cubit/hotels_favorites_cubit.dart';
+import 'package:travel_hub/navigation/favorites/hotels_favorites/data/cubit/hotels_favorites_state.dart';
 import 'package:travel_hub/navigation/hotels/data/cubit/hotels_cubit.dart';
 import 'package:travel_hub/navigation/hotels/data/cubit/hotels_state.dart';
 import 'package:travel_hub/navigation/hotels/models/hotels_model.dart';
@@ -69,7 +71,28 @@ class HotelCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _HotelImage(imageUrl: hotel.imageUrl, stars: hotel.stars.toDouble()),
+             Stack(
+              children: [
+                _HotelImage(imageUrl: hotel.imageUrl, stars: hotel.stars.toDouble()),
+                BlocBuilder<FavoritesCubit, FavoritesState>(
+                  buildWhen: (prev, curr) => curr is FavoritesLoaded || curr is FavoritesLoading,
+                  builder: (context, favState) {
+                    final favCubit = context.read<FavoritesCubit>();
+                    final isFav = favCubit.isFavorite(hotel);
+
+                    return IconButton(
+                      icon: Icon(
+                        isFav ? Icons.favorite : Icons.favorite_border,
+                        color: isFav ? Colors.red : Colors.white,
+                      ),
+                      onPressed: () {
+                        favCubit.toggleFavorite(hotel);
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
             Padding(
               padding: EdgeInsetsDirectional.all(12.r),
               child: Column(
