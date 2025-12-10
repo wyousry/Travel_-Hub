@@ -5,12 +5,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Widget? bottomWidget;
   final bool centerTitle;
+    final List<Widget>? actions;
 
   const CustomAppBar({
     super.key,
     required this.title,
     this.bottomWidget,
     this.centerTitle = true,
+        this.actions,
   });
 
   @override
@@ -24,7 +26,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor:
           appBarTheme.backgroundColor ?? theme.scaffoldBackgroundColor,
       centerTitle: centerTitle,
-      iconTheme: appBarTheme.iconTheme ??
+       iconTheme: appBarTheme.iconTheme ??
+
           IconThemeData(color: appBarTheme.foregroundColor ?? Colors.black87),
       title: Column(
         crossAxisAlignment:
@@ -45,6 +48,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             bottomWidget!,
           ],
         ],
+    
       ),
     );
   }

@@ -12,7 +12,6 @@ import 'package:travel_hub/constant.dart';
 import 'package:travel_hub/core/utils/app_router.dart';
 import 'package:travel_hub/navigation/home/presentation/widgets/action_button.dart';
 import 'package:travel_hub/navigation/home/presentation/widgets/attractions_section.dart';
-import 'package:travel_hub/navigation/home/presentation/widgets/home_header.dart';
 import 'package:travel_hub/navigation/home/presentation/widgets/search_field.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -100,105 +99,121 @@ class _HomeScreenState extends State<HomeScreen> {
     final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsetsDirectional.only(top: 15),
-      child: Scaffold(
-        appBar:  AppBar(
-          title: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CircleAvatar(
-                radius: 25.r,
-                backgroundColor: kGrey.shade300,
-                backgroundImage: savedMemoryImage != null
-                    ? MemoryImage(savedMemoryImage!)
-                    : localImage != null
-                    ? FileImage(localImage!)
-                    : savedImageUrl != null
-                    ? NetworkImage(savedImageUrl!)
-                    : null,
-                child:
-                    (localImage == null &&
-                        savedMemoryImage == null &&
-                        savedImageUrl == null)
-                    ? Icon(Icons.person, size: 35.r)
-                    : null,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Welcome ${userName??""}",
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18.sp,
-                    ),
-                  ),
-                  const HomeHeader(),
-                ],
-              ),
-            ],
-          ),
-        ),
-        body: SingleChildScrollView(
-          padding: EdgeInsetsDirectional.symmetric(horizontal: 20.w),
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Scaffold(
+          appBar:  AppBar(
+            title: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CircleAvatar(
+                  radius: 25.r,
+                  backgroundColor: kGrey.shade300,
+                  backgroundImage: savedMemoryImage != null
+                      ? MemoryImage(savedMemoryImage!)
+                      : localImage != null
+                      ? FileImage(localImage!)
+                      : savedImageUrl != null
+                      ? NetworkImage(savedImageUrl!)
+                      : null,
+                  child:
+                      (localImage == null &&
+                          savedMemoryImage == null &&
+                          savedImageUrl == null)
+                      ? Icon(Icons.person, size: 35.r)
+                      : null,
+                ),
+        Padding(
+          padding: const EdgeInsets.only(left: 16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SearchField(),
-              SizedBox(height: 20.h),
-              LayoutBuilder(
-                builder: (context, constraints) {
-                  final buttonWidth = (constraints.maxWidth - 16.w) / 2;
-                  return Wrap(
-                    spacing: 16.w,
-                    runSpacing: 16.h,
-                    children: [
-                      ActionButton(
-                        color: kBackgroundColor,
-                        icon: Icons.hotel,
-                        label: "Hotels".tr(),
-                        onTap: () {
-                          if (widget.onTabSelected != null) {
-                            widget.onTabSelected!(1);
-                          }
-                        },
-                        width: buttonWidth,
-                      ),
-                      ActionButton(
-                        color: kOrange,
-                        icon: Icons.place,
-                        label: "Places to Visit".tr(),
-                        onTap: () {
-                          if (widget.onTabSelected != null) {
-                            widget.onTabSelected!(2);
-                          }
-                        },
-                        width: buttonWidth,
-                      ),
-                      ActionButton(
-                        color: kGreen,
-                        icon: Icons.map,
-                        label: "Map".tr(),
-                        onTap: () {
-                          if (widget.onTabSelected != null) {
-                            widget.onTabSelected!(3);
-                          }
-                        },
-                        width: buttonWidth,
-                      ),
-                      ActionButton(
-                        color: kPurple,
-                        icon: Icons.camera_alt,
-                        label: "AI Camera".tr(),
-                        onTap: () => _handleCameraTap(context),
-                        width: buttonWidth,
-                      ),
-                    ],
-                  );
-                },
-              ),
-              SizedBox(height: 24.h),
-              const AttractionsSection(),
+        Text(
+          "Welcome ,",
+          style: theme.textTheme.bodyLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+            fontSize: 20.sp,    
+            color: kOrange, 
+          ),
+        ),
+        Text(
+          userName ?? "",
+          style: theme.textTheme.bodyLarge?.copyWith(
+            fontWeight: FontWeight.w700,
+            fontSize:18.sp,    
+            color: kBackgroundColor,
+          ),
+        ),
             ],
+          ),
+        )
+              ],
+            ),
+          ),
+        
+          body: SingleChildScrollView(
+            padding: EdgeInsetsDirectional.symmetric(horizontal: 20.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 25.h),
+                SearchField(),
+                SizedBox(height: 20.h),
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    final buttonWidth = (constraints.maxWidth - 16.w) / 2;
+                    return Wrap(
+                      spacing: 16.w,
+                      runSpacing: 16.h,
+                      children: [
+                        ActionButton(
+                          color: kBackgroundColor,
+                          icon: Icons.hotel,
+                          label: "Hotels".tr(),
+                          onTap: () {
+                            if (widget.onTabSelected != null) {
+                              widget.onTabSelected!(1);
+                            }
+                          },
+                          width: buttonWidth,
+                        ),
+                        ActionButton(
+                          color: kOrange,
+                          icon: Icons.place,
+                          label: "Places to Visit".tr(),
+                          onTap: () {
+                            if (widget.onTabSelected != null) {
+                              widget.onTabSelected!(2);
+                            }
+                          },
+                          width: buttonWidth,
+                        ),
+                        ActionButton(
+                          color: kGreen,
+                          icon: Icons.map,
+                          label: "Map".tr(),
+                          onTap: () {
+                            if (widget.onTabSelected != null) {
+                              widget.onTabSelected!(3);
+                            }
+                          },
+                          width: buttonWidth,
+                        ),
+                        ActionButton(
+                          color: kPurple,
+                          icon: Icons.camera_alt,
+                          label: "AI Camera".tr(),
+                          onTap: () => _handleCameraTap(context),
+                          width: buttonWidth,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+                SizedBox(height: 24.h),
+                const AttractionsSection(),
+              ],
+            ),
           ),
         ),
       ),

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_hub/constant.dart';
 import 'package:travel_hub/core/utils/app_router.dart';
 import 'package:travel_hub/core/utils/assets.dart';
@@ -34,9 +35,18 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
     _controller.forward();
 
-    Timer(const Duration(seconds: 6), () {
-      if (mounted) {
+    Timer(const Duration(seconds: 6), () async {
+      if (!mounted) return;
+      final prefs = await SharedPreferences.getInstance();
+      final seenWelcome = prefs.getBool('seenWelcome') ?? false;
+
+      if (!seenWelcome) {
+        await prefs.setBool('seenWelcome', true);
+        if (!mounted) return;
         GoRouter.of(context).pushReplacement(AppRouter.kWelcomeView);
+      } else {
+        if (!mounted) return;
+        GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
       }
     });
   }
@@ -56,19 +66,14 @@ class _SplashViewBodyState extends State<SplashViewBody>
     return Container(
       width: double.infinity,
       height: double.infinity,
-      decoration: const BoxDecoration(
-        gradient: linearGradient,
-      ),
+      decoration: const BoxDecoration(gradient: linearGradient),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ScaleTransition(
               scale: _animation,
-              child: Image.asset(
-                AssetsData.splashLogo,
-                width: width * 0.4,
-              ),
+              child: Image.asset(AssetsData.splashLogo, width: width * 0.4),
             ),
             SizedBox(height: height * 0.00001),
             Text(
@@ -94,7 +99,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
                 return Container(
                   width: width * 0.35 * _animation.value,
                   height: 2,
-                  color:kWhite.withOpacity(0.9),
+                  color: kWhite.withOpacity(0.9),
                 );
               },
             ),

@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:travel_hub/constant.dart';
 import 'package:travel_hub/core/utils/app_router.dart';
 
-class successScreen extends StatelessWidget {
-  const successScreen({super.key});
+class SuccessScreen extends StatelessWidget {
+  const SuccessScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class successScreen extends StatelessWidget {
                     GoRouter.of(context).go(AppRouter.kLoginView);
                   },
                   icon: const Icon(
-                    Icons.arrow_back,
+                    Icons.arrow_circle_left_outlined,
                     color: kWhite,
                     size: 28,
                   ),

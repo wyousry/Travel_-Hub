@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:travel_hub/constant.dart';
 import 'package:travel_hub/core/utils/app_router.dart';
@@ -140,7 +141,7 @@ class _ResetScreenState extends State<ResetScreen> {
                             onPressed: () {
                               GoRouter.of(context).go(AppRouter.kLoginView);
                             },
-                            icon: const Icon(Icons.arrow_back),
+                            icon: Icon(Icons.arrow_circle_left_outlined,size: 28.h,color: kBlack,),
                           ),
                           const Expanded(
                             child: Center(
@@ -149,6 +150,7 @@ class _ResetScreenState extends State<ResetScreen> {
                                 style: TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
+                                  color: kBlack
                                 ),
                               ),
                             ),

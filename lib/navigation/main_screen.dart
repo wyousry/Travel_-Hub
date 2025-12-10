@@ -32,13 +32,14 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    _pages = [
-      const HomeScreen(),
-      const HotelsScreen(),
-      const LandMarkScreen(),
-      const FullMapScreen(),
-      SettingScreen(isDarkMode: _isDarkMode, onToggleTheme: _toggleTheme),
-    ];
+   _pages = [
+  HomeScreen(onTabSelected: (index) => _onItemTapped(index)),
+  HotelsScreen(),
+  LandMarkScreen(),
+  FullMapScreen(),
+  SettingScreen(isDarkMode: _isDarkMode, onToggleTheme: _toggleTheme),
+];
+
   }
 
   void _onItemTapped(int index) {

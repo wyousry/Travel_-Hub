@@ -47,18 +47,27 @@ abstract class AppRouter {
   static const kLandMarkDetailsView = '/marksDetails';
 
   static final routers = GoRouter(
-    redirect: (context, state) {
+   redirect: (context, state) {
       final user = FirebaseAuth.instance.currentUser;
       final loc = state.matchedLocation;
-      final isAuthRoute = loc == kLoginView || loc == kRegisterView || loc == kForgetView || loc == kWelcomeView;
-      final isResetRoute = loc == kReset || loc.startsWith('/__/auth/action');
 
-      if (loc == '/') return null;
+      final isPublicRoute = loc == '/' ||
+          loc == kLoginView ||
+          loc == kRegisterView ||
+          loc == kForgetView ||
+          loc == kWelcomeView ||
+          loc == kSuccess ||
+          loc == kReset ||
+          loc.startsWith('//auth/action');
 
       if (user == null) {
-        if (isAuthRoute || isResetRoute) return null;
+        if (isPublicRoute) return null;
         return kLoginView;
       } else {
+        final isAuthRoute = loc == kLoginView ||
+            loc == kRegisterView ||
+            loc == kForgetView ||
+            loc == kWelcomeView;
         if (isAuthRoute) return kNavigationView;
         return null;
       }
@@ -87,7 +96,7 @@ abstract class AppRouter {
       ),
        GoRoute(
         path: kSuccess,
-        builder: (context, state) => const successScreen(),
+        builder: (context, state) => const SuccessScreen(),
       ),
 
       GoRoute(

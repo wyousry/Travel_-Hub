@@ -118,10 +118,6 @@
   "See more": "See more",
   "Camera": "Camera",
   "Gallery": "Gallery",
-  "Share":"Share",
-  "Play Audio": "Play Audio",
-  "Save": "Save",
-  "Retake": "Retake",
   "confirm_logout": "Are you sure you want to logout?",
   "cancel": "Cancel",
   "confirm": "Confirm",
@@ -133,7 +129,9 @@
   "support": "Support",
   "help": "Help",
   "more": "More",
-  "about_us": "About Us"
+  "about_us": "About Us",
+  "Profile picture has been updated successfully":"Profile picture has been updated successfully",
+  "Favorites":"Favorites"
 
   
 

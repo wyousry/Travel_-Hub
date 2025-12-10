@@ -1,13 +1,11 @@
 import 'dart:async';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:travel_hub/core/utils/assets.dart';
 import 'package:travel_hub/navigation/maps/services/hotel_service.dart';
 import 'package:travel_hub/navigation/maps/services/location_service.dart';
-
+import 'package:travel_hub/core/utils/assets.dart';
 
 class FullMapController {
   final Completer<GoogleMapController> googleController = Completer();
@@ -51,11 +49,8 @@ class FullMapController {
           position: LatLng(hotel.latitude, hotel.longitude),
           icon: icon,
           infoWindow: InfoWindow(
-            
             title: hotel.name,
             snippet: "Rating: ${hotel.rating}",
-            onTap: () {
-            },
           ),
         ),
       );
@@ -70,26 +65,22 @@ class FullMapController {
     final controller = await googleController.future;
 
     controller.animateCamera(
-      CameraUpdate.newLatLngZoom(
-        LatLng(pos.latitude, pos.longitude),
-        16,
-      ),
+      CameraUpdate.newLatLngZoom(LatLng(pos.latitude, pos.longitude), 16),
     );
   }
 
-  Future<void> searchLocation(String query, Function refreshUI) async {
-    if (query.isEmpty) return;
+  Future<LatLng?> searchLocation(String query) async {
+    if (query.isEmpty) return null;
 
-    final locations = await locationFromAddress(query);
-    if (locations.isEmpty) throw Exception("No results found");
+    try {
+      final locations = await locationFromAddress(query);
+      if (locations.isEmpty) return null;
 
-    final loc = locations.first;
-    final controller = await googleController.future;
-
-    controller.animateCamera(
-      CameraUpdate.newLatLngZoom(LatLng(loc.latitude, loc.longitude), 15),
-    );
-
-    refreshUI();
+      final loc = locations.first;
+      return LatLng(loc.latitude, loc.longitude);
+    } catch (e) {
+      print("Search error: $e");
+      return null;
+    }
   }
 }

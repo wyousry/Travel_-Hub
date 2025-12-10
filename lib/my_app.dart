@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travel_hub/core/utils/app_router.dart';
 import 'package:travel_hub/core/utils/app_theme.dart';
+import 'package:travel_hub/core/utils/deep_link_listener.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -27,15 +28,16 @@ class _MyAppState extends State<MyApp> {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
-          theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.darkTheme,
-          themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-          routerConfig: AppRouter.routers,
+        return  DeepLinkListener(
+          child: MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            routerConfig: AppRouter.routers,
+          ),
         );
       },
     );

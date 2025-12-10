@@ -76,20 +76,20 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       onPressed: () {
                         GoRouter.of(context).go(AppRouter.kLoginView);
                       },
-                      icon: const Icon(Icons.arrow_back),
+                      icon:  Icon(Icons.arrow_circle_left_outlined,size: 28.h,color: kBlack,),
                     ),
-                     Expanded(
+                    const Expanded(
                       child: Center(
                         child: Text(
                           'Forgot your password ?',
                           style: TextStyle(
-                            fontSize: 22.sp,
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                     ),
-                     SizedBox(width: 48.w),
+                    const SizedBox(width: 48),
                   ],
                 ),
                 const SizedBox(height: 60),
@@ -110,59 +110,59 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     ),
                   ),
                 ),
-                 SizedBox(height: 80.h),
-                 Center(
+                const SizedBox(height: 80),
+                const Center(
                   child: Text(
                     'Enter your email address',
-                    style: TextStyle(fontSize: 24.sp, color: kWhite),
+                    style: TextStyle(fontSize: 24, color: kWhite),
                   ),
                 ),
-                 SizedBox(height: 20.h),
+                const SizedBox(height: 20),
                 TextField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     hintText: 'Enter Your Email',
-                    contentPadding:  EdgeInsets.symmetric(
-                      horizontal: 16.w,
-                      vertical: 14.h,
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 14,
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.r),
+                      borderRadius: BorderRadius.circular(8),
                       borderSide: const BorderSide(color: kWhite),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.r),
-                      borderSide:  BorderSide(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(
                         color: kWhite,
-                        width: 1.2.w,
+                        width: 1.2,
                       ),
                     ),
                     filled: true,
                     fillColor: kWhite,
                   ),
                 ),
-                 SizedBox(height: 20.h),
+                const SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
-                  height: 48.h,
+                  height: 48,
                   child: ElevatedButton(
                     onPressed: _loading ? null : _resetPassword,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: kPriceColor,
                       foregroundColor: kWhite,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.r),
+                        borderRadius: BorderRadius.circular(8),
                       ),
                       elevation: 0,
                     ),
                     child: _loading
                         ? const CircularProgressIndicator(color: kWhite)
-                        :  Text(
+                        : const Text(
                             'Reset Password',
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
-                              fontSize: 16.sp,
+                              fontSize: 16,
                             ),
                           ),
                   ),
