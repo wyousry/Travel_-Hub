@@ -1,16 +1,84 @@
-# travel_hub
+# 🌍 Travel Hub
 
-A new Flutter project.
+Travel Hub is a smart travel application built with **Flutter** that helps users plan their trips in one place. Instead of using multiple apps for hotels, attractions, maps, and recommendations, Travel Hub provides an all-in-one travel experience with a simple and user-friendly interface.
 
-## Getting Started
+## ✨ Features
 
-This project is a starting point for a Flutter application.
+- 🔐 User Authentication (Sign Up, Login, Logout)
+- 🏨 Browse and Book Hotels
+- 📍 Explore Tourist Attractions and Places
+- ❤️ Save Favorite Places
+- 🤖 AI-powered Travel Assistant
+- 🗺️ Interactive Maps
+- 🌐 Responsive and Modern UI
+- ☁️ Firebase Integration
 
-A few resources to get you started if this is your first Flutter project:
+## 🛠️ Tech Stack
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Flutter**
+- **Dart**
+- **Firebase Authentication**
+- **Cloud Firestore**
+- **Firebase Storage**
+- **Google Maps API**
+- **REST APIs**
+- **Provider / Cubit (State Management)**
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📱 Screens
+
+- Splash Screen
+- Onboarding
+- Authentication
+- Home
+- Hotels
+- Places
+- AI Assistant
+- Favorites
+- Profile
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Flutter SDK
+- Android Studio / VS Code
+- Firebase Project
+
+### Installation
+
+```bash
+git clone https://github.com/your-username/travel-hub.git
+
+cd travel-hub
+
+flutter pub get
+
+flutter run
+```
+
+## 📂 Project Structure
+
+```
+lib/
+├── core/
+├── features/
+├── models/
+├── services/
+├── widgets/
+└── main.dart
+```
+
+## 🎯 Project Goal
+
+Travel Hub aims to simplify travel planning by combining hotel booking, destination discovery, maps, and AI-powered recommendations into a single mobile application.
+
+## 👨‍💻 Developed By
+
+**Wafaa Yousry Ahmed**
+
+Faculty of Engineering  
+Systems and Computers Engineering  
+Al-Azhar University
+
+---
+⭐ If you like this project, don't forget to give it a star!
